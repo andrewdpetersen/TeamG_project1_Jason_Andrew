@@ -7,19 +7,17 @@
 <body>
 <h1>User Dashboard</h1>
 
-<form action="POST">
-    <label for="flightID">Enter Ticket Number:</label><br>
-    <input type="text" id="flightID" name="flightID" value=""><br>
+<form method="post" action="http://localhost:8080/Project1-Backend/manager">
+    <label for="ticket_id">Enter Ticket Number:</label><br>
+    <input type="text" id="ticket_id" name="ticket_id" value="" placeholder="EnterTicketNumber"><br>
+    <input type="submit" value="CANCEL">
 <!--    <label for="ticketNum">Enter number of tickets to BUY $$$$$$:</label><br>-->
 <!--    <input type="text" id="ticketNum" name="ticketNum" value=""><br><br>-->
 <!--    <label for="flightID">Enter Flight Number:</label><br>-->
 <!--    <input type="text" id="flightID" name="flightID" value=""><br>-->
 <!--    <label for="ticketNum">Enter number of tickets to BUY $$$$$$:</label><br>-->
 <!--    <input type="text" id="ticketNum" name="ticketNum" value=""><br><br>-->
-
-
-    <input type="submit" value="CANCEL">
-
 </form>
+
 </body>
 </html>

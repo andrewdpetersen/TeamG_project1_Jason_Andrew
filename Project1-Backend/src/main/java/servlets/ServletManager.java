@@ -7,7 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 public class ServletManager extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp){
-
+        req.getParameter("ticket_id");
+        resp.setStatus(200);
     }
 
     @Override
