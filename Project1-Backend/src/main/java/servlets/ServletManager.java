@@ -14,15 +14,14 @@ public class ServletManager extends HttpServlet {
         int ticket_id = Integer.parseInt(string_ticket_id);
         try{
             TicketDAO dao = new TicketDAO();
-            dao.delete(ticket_id);
+            int flight_id = dao.delete(ticket_id);
+            resp.getWriter().println("Ticket #: "+ticket_id + " has almost been cancelled");
+            resp.getWriter().print("You no longer have a ticket for flight number: "+flight_id);
+            resp.setStatus(200);
         }
         catch(Exception e){
             e.printStackTrace();
         }
-
-
-        resp.getWriter().print("Ticket #: "+ticket_id + " has been cancelled");
-        resp.setStatus(200);
     }
 
     @Override
