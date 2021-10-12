@@ -16,7 +16,7 @@
         <listener-class>servlets.DependencyLoaderListener</listener-class>
     </listener>
 
-    <servlet>
+    <servlet><!--MANAGER-->
         <servlet-name>ServletManager</servlet-name>
         <servlet-class>servlets.ServletManager</servlet-class>
     </servlet>
@@ -26,7 +26,7 @@
         <url-pattern>/manager</url-pattern>
     </servlet-mapping>
 
-    <servlet>
+    <servlet><!--TICKETS-->
         <servlet-name>ServletTickets</servlet-name>
         <servlet-class>servlets.ServletTickets</servlet-class>
     </servlet>
@@ -35,5 +35,41 @@
         <servlet-name>ServletTickets</servlet-name>
         <url-pattern>/tickets</url-pattern>
     </servlet-mapping>
+
+    <servlet> <!--FLIGHTS-->
+        <servlet-name>ServletFlights</servlet-name>
+        <servlet-class>servlets.ServletFlights</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ServletFlights</servlet-name>
+        <url-pattern>/flights</url-pattern>
+    </servlet-mapping>
+
+    <servlet> <!--PEOPLE-->
+        <servlet-name>ServletPeople</servlet-name>
+        <servlet-class>servlets.ServletPeople</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ServletPeople</servlet-name>
+        <url-pattern>/people</url-pattern>
+    </servlet-mapping>
+
+    <servlet> <!--DELETE-->
+        <servlet-name>ServletDelete</servlet-name>
+        <servlet-class>servlets.ServletDelete</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ServletDelete</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+
+
+
+
+
+
 
 </web-app>
