@@ -25,4 +25,15 @@
         <servlet-name>ServletManager</servlet-name>
         <url-pattern>/manager</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ServletTickets</servlet-name>
+        <servlet-class>servlets.ServletTickets</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ServletTickets</servlet-name>
+        <url-pattern>/tickets</url-pattern>
+    </servlet-mapping>
+
 </web-app>

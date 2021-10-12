@@ -37,7 +37,13 @@ public class TicketDAO{
 
         pstmt.setInt(1,ticket_id); // puts ticket_id into first ? in "sql" string
         ResultSet rs = pstmt.executeQuery();
+
         while(rs.next()){
+            String sql2 = "DELETE FROM tickets_people_flights WHERE ticket_id = ?";
+            PreparedStatement prepstmt = conn.prepareStatement(sql2);
+            prepstmt.setInt(1,ticket_id);
+            prepstmt.executeUpdate();
+
             flight_id = rs.getInt(3);
         }
         return flight_id;
