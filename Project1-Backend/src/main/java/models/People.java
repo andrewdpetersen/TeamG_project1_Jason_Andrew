@@ -7,7 +7,7 @@ package models;
 public class People {
     private int people_id;
     private String username;
-    private int access_level;
+    private int access_level;  // CAN A PILOT BE A PASSENGER???
     private String password;
 
     //constructor
