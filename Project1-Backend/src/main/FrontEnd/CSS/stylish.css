@@ -1,15 +1,21 @@
 .red {
    color: red;
 }
-.thick {
+.thick { /* class="thick" */
    font-size:20px;
 }
-.green {
+.green { /* sets the class = "green" to have this style, multiple classes OK */
    color:green;
 }
-.admin{
+.admin{ /* sets the class="admin" to have this style */
     background-color:darkred;
 }
-#test{
+#test{ /* sets the id="test" to have this style */
     color:red;
+}
+.pilot{
+    background-color:lightgreen;
+}
+.user{
+    background-color:lightblue;
 }
