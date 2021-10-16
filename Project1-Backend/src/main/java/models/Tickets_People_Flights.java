@@ -1,13 +1,25 @@
 package models;
 
+import javax.persistence.*;
+
 /**
  * This class is a model for resources in our tickets_people_flights table.
  * It has 3 private fields, a constructor, and Getters and Setters. It is an example of
  * encapsulation, and it helps us abstract by obscuring the functionality inside the class.
  */
+@Entity
 public class Tickets_People_Flights {
-    private int ticket_id;
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="ticket_id")
+    private Integer ticket_id;
+
+    @Column
     private int people_id;
+
+    @Column
     private int flight_id;
 
     public Tickets_People_Flights() {

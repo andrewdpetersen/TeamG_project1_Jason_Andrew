@@ -1,14 +1,30 @@
 package models;
 
+import javax.persistence.*;
+
 /**
  * This class is a model for resources in the flights table. It has 5 private
  * fields, a constructor, and Getters and Setters.
  */
+@Entity
+//Annotation helps hibernate set up the schema (format of the DB tables).
 public class Flights {
+
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int flight_id;
+
+    @Column
     private String departure_city;
+
+    @Column
     private String arrival_city;
+
+    @Column
     private String date;
+
+    @Column
     private String time;
 
     public Flights() {

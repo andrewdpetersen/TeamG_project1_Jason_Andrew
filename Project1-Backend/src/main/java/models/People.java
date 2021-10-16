@@ -1,14 +1,31 @@
 package models;
 
+import javax.persistence.*;
+import java.util.List;
+
 /**
  * This class is our model for resources in the people table. It has 4 private fields,
  * a constructor, and public Getters and Setters.
  */
+@Entity
 public class People {
-    private int people_id;
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer people_id;
+
+    @Column
     private String username;
+
+    @Column
     private int access_level;  // CAN A PILOT BE A PASSENGER???
+
+    @Column
     private String password;
+
+    @Column
+    @OneToMany(mappedBy = "ticket_id")
+    private List<Integer> ticketList;
 
     //constructor
     public People() {

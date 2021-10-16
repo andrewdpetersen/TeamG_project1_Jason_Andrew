@@ -28,9 +28,9 @@
             <version>2.7.4</version>
         </dependency>
 
-        <dependency>
+        <dependency><!--Kyle is using a different version, 5.2.??-->
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
+            <artifactId>hibernate-core</artifactId>
             <version>5.4.10.Final</version>
         </dependency>
     </dependencies>
