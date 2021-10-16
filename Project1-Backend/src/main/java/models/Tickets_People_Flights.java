@@ -8,19 +8,22 @@ import javax.persistence.*;
  * encapsulation, and it helps us abstract by obscuring the functionality inside the class.
  */
 @Entity
+@Table(name = "tickets")
 public class Tickets_People_Flights {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="ticket_id")
     private Integer ticket_id;
 
     @Column
-    private int people_id;
+    @ManyToOne
+    @JoinColumn(name = "people_id")
+    private People person;
 
     @Column
-    private int flight_id;
+    @ManyToOne
+    @JoinColumn(name = "flight_id")
+    private Flights flight;
 
     public Tickets_People_Flights() {
     }
@@ -28,24 +31,11 @@ public class Tickets_People_Flights {
     public int getTicket_id() {
         return ticket_id;
     }
-
     public void setTicket_id(int ticket_id) {
         this.ticket_id = ticket_id;
     }
-
-    public int getPeople_id() {
-        return people_id;
-    }
-
-    public void setPeople_id(int people_id) {
-        this.people_id = people_id;
-    }
-
-    public int getFlight_id() {
-        return flight_id;
-    }
-
-    public void setFlight_id(int flight_id) {
-        this.flight_id = flight_id;
-    }
+    public People getPerson() {return person;}
+    public void setPerson(People person) {this.person = person;}
+    public Flights getFlight() {return flight;}
+    public void setFlight(Flights flight) {this.flight = flight;}
 }

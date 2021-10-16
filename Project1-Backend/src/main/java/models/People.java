@@ -8,6 +8,7 @@ import java.util.List;
  * a constructor, and public Getters and Setters.
  */
 @Entity
+@Table(name="people")
 public class People {
     @Id
     @Column
@@ -23,15 +24,14 @@ public class People {
     @Column
     private String password;
 
-    @Column
     @OneToMany(mappedBy = "ticket_id")
-    private List<Integer> ticketList;
+    private List<Tickets_People_Flights> ticketList;
 
     //constructor
     public People() {
     }
 
-    public int getPeople_id() {
+    public Integer getPeople_id() {
         return people_id;
     }
 

@@ -1,12 +1,14 @@
 package models;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * This class is a model for resources in the flights table. It has 5 private
  * fields, a constructor, and Getters and Setters.
  */
 @Entity
+@Table(name="flights")
 //Annotation helps hibernate set up the schema (format of the DB tables).
 public class Flights {
 
@@ -26,6 +28,9 @@ public class Flights {
 
     @Column
     private String time;
+
+    @OneToMany(mappedBy = "ticket_id")
+    private List<Tickets_People_Flights> ticketList;
 
     public Flights() {
     }
