@@ -5,6 +5,7 @@ import models.People;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -32,7 +33,7 @@ public class FlightService {
     /**
      * This method fetches a flight from our database with the given flight id.
      * @param flight_id
-     * @return
+     * @return Flights
      */
     public static Flights getFlightById(int flight_id){
         return session.get(Flights.class, flight_id);
@@ -40,7 +41,7 @@ public class FlightService {
 
     /**
      * This method returns a list of all the flights in our database.
-     * @return
+     * @return List<Flights>
      */
     public static List<Flights> getAllFlights(){
         CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -51,23 +52,31 @@ public class FlightService {
     }
 
     /**
-     * This method is incomplete... we need to adjust it to limit our search by city.
+     * This method returns a list of all the flights with a given departure city.
      * @param departureCity
-     * @return
+     * @return List<Flights>
      */
     public static List<Flights> getFlightsByDepartureCity(String departureCity){
-        List<Flights> flightsList = new LinkedList<>();
-        return flightsList;
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Flights> query = builder.createQuery(Flights.class);
+        Root<Flights> root = query.from(Flights.class);
+        query.select(root).where(builder.equal(root.get("departure_city"),departureCity));
+        Query newQuery = session.createQuery(query);
+        return newQuery.getResultList();
     }
 
     /**
-     * This method is incomplete... we need to adjust it to limit our search by city.
+     * This method returns a list of all the flights with a given arrival city.
      * @param arrivalCity
-     * @return
+     * @return List<Flights>
      */
     public static List<Flights> getFlightsByArrivalCity(String arrivalCity){
-        List<Flights> flightsList = new LinkedList<>();
-        return flightsList;
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Flights> query = builder.createQuery(Flights.class);
+        Root<Flights> root = query.from(Flights.class);
+        query.select(root).where(builder.equal(root.get("arrival_city"),arrivalCity));
+        Query newQuery = session.createQuery(query);
+        return newQuery.getResultList();
     }
 
     /**
@@ -89,5 +98,25 @@ public class FlightService {
         session.delete(flight);
     }
 
+
     //Maybe more get methods based on needs
+
+
+
+    public static Session getSession(){
+        return session;
+    }
+    public static void setSession(Session session) {
+        FlightService.session = session;
+    }
+
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public static void setSessionFactory(SessionFactory sessionFactory) {
+        FlightService.sessionFactory = sessionFactory;
+    }
+
+
 }
