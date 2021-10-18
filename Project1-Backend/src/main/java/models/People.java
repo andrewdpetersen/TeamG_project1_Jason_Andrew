@@ -19,7 +19,7 @@ public class People {
     private String username;
 
     @Column
-    private int access_level;  // CAN A PILOT BE A PASSENGER???
+    private int access_level;  // CAN A PILOT BE A PASSENGER??? user=0,pilot=1,admin=2
 
     @Column
     private String password;
