@@ -18,7 +18,7 @@ public class PeopleService {
      * It is unclear if this initialization method is necessary now that we are
      * using hibernate rather than a direct repo.
      */
-    public static void init(){}
+    public static void init(){}  // used for repos... might not need anymore. TODO: DELETE
 
     /**
      * This method saves a People instance to our database

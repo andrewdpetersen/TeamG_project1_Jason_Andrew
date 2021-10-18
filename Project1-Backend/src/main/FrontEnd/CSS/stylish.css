@@ -5,7 +5,7 @@
    font-size:20px;
 }
 .green { /* sets the class = "green" to have this style, multiple classes OK */
-   color:green;
+   color:green; /* text color */
 }
 .admin{ /* sets the class="admin" to have this style */
     background-color:darkred;
@@ -26,5 +26,8 @@
     /*font-family: Brush Script MT; */
     /*font-family: Monaco; */
     font-family: Fantasy;
-    color:orange;
+    color:lightblue;
+}
+h1{
+font-size: 50px;
 }
