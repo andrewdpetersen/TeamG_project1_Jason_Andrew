@@ -24,7 +24,7 @@ public class FlightService {
 
     /**
      * This method save a Flights instance to our database.
-     * @param flight
+     * @param flight - the Flights instance we want to save in our database
      */
     public static void saveNewFlight(Flights flight){
         session.save(flight);
@@ -32,7 +32,7 @@ public class FlightService {
 
     /**
      * This method fetches a flight from our database with the given flight id.
-     * @param flight_id
+     * @param flight_id - the id of the flight that we want to find
      * @return Flights
      */
     public static Flights getFlightById(int flight_id){
@@ -53,7 +53,7 @@ public class FlightService {
 
     /**
      * This method returns a list of all the flights with a given departure city.
-     * @param departureCity
+     * @param departureCity - String, the city all flights in the list are departing from
      * @return List<Flights>
      */
     public static List<Flights> getFlightsByDepartureCity(String departureCity){
@@ -67,7 +67,7 @@ public class FlightService {
 
     /**
      * This method returns a list of all the flights with a given arrival city.
-     * @param arrivalCity
+     * @param arrivalCity - String, the city all flights in the list are arriving at
      * @return List<Flights>
      */
     public static List<Flights> getFlightsByArrivalCity(String arrivalCity){
@@ -81,8 +81,8 @@ public class FlightService {
 
     /**
      * This method is incomplete... we need to adjust it to limit our search by cities.
-     * @param departureCity
-     * @param arrivalCity
+     * @param departureCity - String, the city all flights in the list are departing from
+     * @param arrivalCity - String, the city all flights in the list are arriving at
      * @return
      */
     public static List<Flights> getFlightsByArrivalDestination(String departureCity, String arrivalCity){
@@ -92,7 +92,7 @@ public class FlightService {
 
     /**
      * This method deletes a Flights instance.
-     * @param flight
+     * @param flight - the Flights instance that is being deleted
      */
     public static void deleteFlight(Flights flight){
         session.delete(flight);
