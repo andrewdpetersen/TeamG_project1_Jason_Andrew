@@ -26,6 +26,7 @@ public class FlightService {
      * This method save a Flights instance to our database.
      * @param flight - the Flights instance we want to save in our database
      */
+    //This doesn't need a unit test
     public static void saveNewFlight(Flights flight){
         session.save(flight);
     }
@@ -35,6 +36,7 @@ public class FlightService {
      * @param flight_id - the id of the flight that we want to find
      * @return Flights
      */
+    //This doesn't need a unit test
     public static Flights getFlightById(int flight_id){
         return session.get(Flights.class, flight_id);
     }
@@ -94,6 +96,7 @@ public class FlightService {
      * This method deletes a Flights instance.
      * @param flight - the Flights instance that is being deleted
      */
+    //This doesn't need a unit test.
     public static void deleteFlight(Flights flight){
         session.delete(flight);
     }
