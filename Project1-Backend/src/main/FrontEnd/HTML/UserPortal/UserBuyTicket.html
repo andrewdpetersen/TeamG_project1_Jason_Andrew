@@ -8,5 +8,36 @@
 </head>
 <body style="background-color: lightblue" class="user">
 
+<form id="userBuyTickets" action="http://localhost:8080/Project1-Backend/tickets" method="post">
+    <label for="numberOfTickets"></label>
+    <input type="number" id="numberOfTickets">
+
+    <button type="submit" id="submit">Purchase Tickets</button>
+</form>
+
+<script>
+    const form = document.getElementById("userBuyTickets");
+
+    form.addEventListener("submit",function(event){
+        event.preventDefault();
+        const { numberOfTickets } = event.target.elements;
+        SubmitForm(numberOfTickets);
+    });
+
+    async function SubmitForm(numberOfTickets){
+        let formObject = {
+            ticketsCount:numberOfTickets
+        }
+        let response = await fetch("http://localhost:8080/Project1-Backend/tickets", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(formObject)
+            });
+        let json = response.json();
+    }
+
+
+</script>
+
 </body>
 </html>
