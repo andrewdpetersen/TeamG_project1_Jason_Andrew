@@ -6,7 +6,7 @@ public class FileLogger {
     //find where the error Exception occurs
     //timestamp / datestamp
     //format how we write it.
-    
+
 
 
 
