@@ -9,7 +9,6 @@
         };
         console.log("TICKET NUMBER FOUND");
         let response = await fetch("http://localhost:8080/Project1-Backend/tickets", {
-            mode:"no-cors",
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(TicketNumber)
