@@ -8,33 +8,46 @@
 </head>
 <body style="background-color: lightblue" class="user">
 
-<form id="userBuyTickets" action="http://localhost:8080/Project1-Backend/tickets" method="post">
+<form id="userBuyTickets">
     <label for="numberOfTickets"></label>
     <input type="number" id="numberOfTickets">
 
-    <button type="submit" id="submit">Purchase Tickets</button>
+    <button type="submit" id="BuyTickets">Purchase Tickets</button>
 </form>
 
+
 <script>
-    const form = document.getElementById("userBuyTickets");
-
-    form.addEventListener("submit",function(event){
+    const buyTicketsButton = document.getElementById("BuyTickets");
+    const numberOfTickets = document.getElementById("numberOfTickets");
+    console.log("DEBUG GET FORM BY ID");
+    buyTicketsButton.onclick = async (event) => {
         event.preventDefault();
-        const { numberOfTickets } = event.target.elements;
-        SubmitForm(numberOfTickets);
-    });
-
-    async function SubmitForm(numberOfTickets){
-        let formObject = {
-            ticketsCount:numberOfTickets
-        }
+        let TicketNumber = {
+            "number":numberOfTickets
+        };
+        console.log("TICKET NUMBER FOUND");
         let response = await fetch("http://localhost:8080/Project1-Backend/tickets", {
+            mode:"no-cors",
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(formObject)
-            });
-        let json = response.json();
-    }
+            body: JSON.stringify(TicketNumber)
+        });
+        console.dir(response.json);
+        console.log("FETCH FUNCTION CALLED");
+
+        //let json = response.json();
+        document.write("Success");
+
+
+    };
+
+
+    // form.addEventListener("submit",function(event){
+    //     event.preventDefault();
+    //     const { numberOfTickets } = event.target.elements;
+    //     SubmitForm(numberOfTickets);
+    //     console.log(numberOfTickets);
+    // });
 
 
 </script>

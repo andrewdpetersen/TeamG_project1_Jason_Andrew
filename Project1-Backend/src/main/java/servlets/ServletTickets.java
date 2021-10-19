@@ -19,12 +19,13 @@ public class ServletTickets extends HttpServlet {
          * The following is just testing my javascript to make sure it is working
          * like I think it is...
          */
+        System.out.println("DEBUG-TICKETS SERVER REACHED");
         InputStream requestBody = req.getInputStream();
         Scanner sc = new Scanner(requestBody, StandardCharsets.UTF_8.name());
         String jsonText = sc.useDelimiter("\\A").next();
-        System.out.println("DEBUG - JSON Text: " + jsonText);
-        ObjectMapper mapper = new ObjectMapper();
-        Integer payload = mapper.readValue(jsonText, Integer.class);
+        System.out.println("DEBUG Servlet Tickets- JSON Text: " + jsonText);
+//        ObjectMapper mapper = new ObjectMapper();
+//        Integer payload = mapper.readValue(jsonText, Integer.class);
 
         //write logic to create a ticket here
 
