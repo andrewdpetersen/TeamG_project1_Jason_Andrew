@@ -1,14 +1,16 @@
 const form = document.getElementById("userPurchaseTickets");
 form.addEventListener("submit",function(event) {
     event.preventDefault();
-    const {numberOfTickets} = event.target.elements;//object deconstruction using the event, form
+    const numberOfTickets = form.querySelector("#numberOfTickets");
+    const flightID = form.querySelector("#flightID");
     SubmitForm(numberOfTickets);
     console.log(numberOfTickets);
 });
 
 async function SubmitForm(){
     let ticketCount = {
-        "number":numberOfTickets.value
+        "number":numberOfTickets.value,
+        "flight":flightID.value
     }
     let response = await fetch("http://localhost:8080/Project1-Backend/tickets", {
         method: "POST",
@@ -19,5 +21,5 @@ async function SubmitForm(){
     console.log("FETCH FUNCTION CALLED");
 
     //let json = response.json();
-    document.write(`Success! You purchased ${numberOfTickets.value} tickets.`);
+    document.write(`Success! You purchased ${numberOfTickets.value} tickets on flight #: ${flightID.value}`);
 }
