@@ -3,8 +3,7 @@ form.addEventListener("submit",function(event) {
     event.preventDefault();
     const numberOfTickets = form.querySelector("#numberOfTickets");
     const flightID = form.querySelector("#flightID");
-    SubmitForm(numberOfTickets);
-    console.log(numberOfTickets);
+    SubmitForm();
 });
 
 async function SubmitForm(){
