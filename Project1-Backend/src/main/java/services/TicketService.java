@@ -9,7 +9,7 @@ import java.util.List;
 public class TicketService {
     // we want 2 private fields Session factory, session
     private static SessionFactory sessionFactory;  // so we can get the session
-    private static Session session; // We will use this to update the database
+    private static Session session = HibernateManagement.getSession(); // We will use this to update the database
 
 
     //User - buy a TICKET or multiple tickets

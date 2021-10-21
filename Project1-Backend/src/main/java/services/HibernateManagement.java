@@ -8,9 +8,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateManagement {
-    private Session session;
+    private static Session session;
 
-    public Session getSession() {
+    public static Session getSession() {
         if(session==null){
             Configuration config = new Configuration();
             config.addAnnotatedClass(Flights.class);
@@ -28,9 +28,5 @@ public class HibernateManagement {
             TicketService.setSession(factory.openSession());
         }
         return session;
-    }
-
-    public void setSession(Session session) {
-        this.session = session;
     }
 }
