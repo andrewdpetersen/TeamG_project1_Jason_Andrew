@@ -7,10 +7,10 @@ import javax.persistence.*;
  * It has 3 private fields, a constructor, and Getters and Setters. It is an example of
  * encapsulation, and it helps us abstract by obscuring the functionality inside the class.
  */
-@Entity
-@Table(name = "tickets")
+@Entity // mapped CLASS
+@Table(name = "tickets")  //sets the table
 public class Tickets_People_Flights {
-    @Id
+    @Id  // mark as a primary key
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ticket_id;
