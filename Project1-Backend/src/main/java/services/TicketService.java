@@ -8,14 +8,14 @@ import java.util.List;
 
 public class TicketService {
     // we want 2 private fields Session factory, session
-    private static SessionFactory sfact;  // so we can get the session
-    private static Session sess; // We will use this to update the database
+    private static SessionFactory sessionFactory;  // so we can get the session
+    private static Session session; // We will use this to update the database
 
 
     //User - buy a TICKET or multiple tickets
     public static void buyNewTicket (Tickets_People_Flights tpf){
         // if(locked=false) then proceed... going to implement before hibernate... a validator somewhere
-        sess.save(tpf);}  // Use the session to save the Object tpf into database
+        session.save(tpf);}  // Use the session to save the Object tpf into database
 
     //User - buy MULTIPLE tickets
     public static void buyMultiTicket(List<Tickets_People_Flights> tpf) {
@@ -24,7 +24,7 @@ public class TicketService {
     }
 
     //User - CANCEL a ticket // Admin will also use
-    public static void cancelTicket (Tickets_People_Flights tpf){sess.delete(tpf);} // Use the session to delete the Object tpf from database
+    public static void cancelTicket (Tickets_People_Flights tpf){session.delete(tpf);} // Use the session to delete the Object tpf from database
 
 
 
@@ -38,5 +38,21 @@ public class TicketService {
     // Pilot - LOCK ability TODO lookup how lock works
     public static void lockoutCancel (int flight_id){
         //sess.lock(flight_id); // lock the ability to cancel flight for Users and Admin or BuyNewTickets
+    }
+
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public static void setSessionFactory(SessionFactory sessionFactory) {
+        TicketService.sessionFactory = sessionFactory;
+    }
+
+    public static Session getSession() {
+        return session;
+    }
+
+    public static void setSession(Session session) {
+        TicketService.session = session;
     }
 }

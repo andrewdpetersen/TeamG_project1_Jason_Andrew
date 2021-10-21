@@ -16,8 +16,16 @@ public class HibernateManagement {
             config.addAnnotatedClass(Flights.class);
             config.addAnnotatedClass(People.class);
             config.addAnnotatedClass(Tickets_People_Flights.class);
-            SessionFactory sessionFactory = config.buildSessionFactory();
-            session = sessionFactory.openSession();
+
+            SessionFactory factory = config.buildSessionFactory();
+
+            FlightService.setSessionFactory(factory);
+            PeopleService.setSessionFactory(factory);
+            TicketService.setSessionFactory(factory);
+
+            FlightService.setSession(factory.openSession());
+            PeopleService.setSession(factory.openSession());
+            TicketService.setSession(factory.openSession());
         }
         return session;
     }
