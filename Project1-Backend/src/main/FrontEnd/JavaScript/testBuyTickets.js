@@ -8,14 +8,13 @@ form.addEventListener("submit",function(event) {
 });
 
 async function SubmitForm(){
-    let ticketCount = {
-        "number":numberOfTickets.value,
+    let flightInfo = {
         "flight":flightID.value
     }
     let response = await fetch("http://localhost:8080/Project1-Backend/tickets", {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(ticketCount)
+        headers: {"Content-Type": "application/json","number":numberOfTickets.value},
+        body: JSON.stringify(flightInfo)
     });
     console.dir(response.json);
     console.log("FETCH FUNCTION CALLED");

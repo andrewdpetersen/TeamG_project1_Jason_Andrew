@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ServletTickets extends HttpServlet {
@@ -21,9 +23,18 @@ public class ServletTickets extends HttpServlet {
          */
         System.out.println("DEBUG-TICKETS SERVER REACHED");
         InputStream requestBody = req.getInputStream();
+
+        //The next line gives us the number of tickets purchased as a String
+        String numberPurchased = req.getHeader("number");
+
+        //The next two lines instantiate a scanner in the request body and get put all the
+        //JSON there in a string
         Scanner sc = new Scanner(requestBody, StandardCharsets.UTF_8.name());
         String jsonText = sc.useDelimiter("\\A").next();
-        System.out.println("DEBUG Servlet Tickets- JSON Text: " + jsonText);
+
+
+        System.out.println("DEBUG FlightID- JSON Text: " + jsonText);
+
 //        ObjectMapper mapper = new ObjectMapper();
 //        Integer payload = mapper.readValue(jsonText, Integer.class);
 
