@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class PeopleService {
-    private static Session session;
+    private static Session session = HibernateManagement.getSession();
     private static SessionFactory sessionFactory;
 
     /**
@@ -59,5 +59,19 @@ public class PeopleService {
         return manifest;
     }
 
+    public static Session getSession() {
+        return session;
+    }
 
+    public static void setSession(Session session) {
+        PeopleService.session = session;
+    }
+
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public static void setSessionFactory(SessionFactory sessionFactory) {
+        PeopleService.sessionFactory = sessionFactory;
+    }
 }

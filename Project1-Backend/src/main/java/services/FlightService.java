@@ -13,7 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class FlightService {
-    private static Session session;
+    private static Session session = HibernateManagement.getSession();
     private static SessionFactory sessionFactory;
 
     /**
