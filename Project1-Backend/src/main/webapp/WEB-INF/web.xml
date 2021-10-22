@@ -56,16 +56,6 @@
         <url-pattern>/people</url-pattern>
     </servlet-mapping>
 
-    <servlet> <!--DELETE-->
-        <servlet-name>ServletDelete</servlet-name>
-        <servlet-class>servlets.ServletDelete</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>ServletDelete</servlet-name>
-        <url-pattern>/delete</url-pattern>
-    </servlet-mapping>
-
     <!-- CORS FILTER -->
     <filter>
         <filter-name>CorsFilter</filter-name>

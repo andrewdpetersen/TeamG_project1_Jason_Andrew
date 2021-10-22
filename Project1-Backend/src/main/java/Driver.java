@@ -1,15 +1,9 @@
-import test.SecretCode;
-import test.TestCase;
-
 import static test.Comparator.compare;
 
 public class Driver {
 
-    public static void main(String[] args){
-
-
-        SecretCode code = new SecretCode();
-        System.out.print(code.decrypt("lazy!!!! s3o6 fe8l I"));
+    public static void main(String[] args) {
+    }
 
 
 //        int[] array1 = new int[3];
@@ -25,5 +19,4 @@ public class Driver {
 //        compare(testcase1.a, testcase1.b);
 //        compare(testcase1.c, testcase1.d);
 //        compare(testcase1.e, testcase1.f);
-        }
-    }
+}
