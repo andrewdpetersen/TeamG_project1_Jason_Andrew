@@ -1,16 +1,11 @@
 package servlets;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import daos.TicketDAO;
-
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class ServletTickets extends HttpServlet {
@@ -31,15 +26,9 @@ public class ServletTickets extends HttpServlet {
         //JSON there in a string
         Scanner sc = new Scanner(requestBody, StandardCharsets.UTF_8.name());
         String jsonText = sc.useDelimiter("\\A").next();
-
-
         System.out.println("DEBUG FlightID- JSON Text: " + jsonText);
 
-//        ObjectMapper mapper = new ObjectMapper();
-//        Integer payload = mapper.readValue(jsonText, Integer.class);
-
-        //write logic to create a ticket here
-
+        //Write logic to add ticket(s) to DB here
 
         //write logic to delete a ticket here
 
@@ -50,6 +39,7 @@ public class ServletTickets extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         //write logic to get all tickets for a given flight here
+        //write logic to get all tickets for a given user here
     }
 
 }
