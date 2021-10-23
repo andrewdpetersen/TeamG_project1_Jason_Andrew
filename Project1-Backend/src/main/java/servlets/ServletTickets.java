@@ -1,6 +1,9 @@
 package servlets;
 
 import models.Tickets_People_Flights;
+import services.FlightService;
+import services.PeopleService;
+import services.TicketService;
 import utils.JSONSplitter;
 
 import javax.servlet.http.HttpServlet;
@@ -39,17 +42,15 @@ public class ServletTickets extends HttpServlet {
                 // UserPurchaseTickets on tickets will need us to unmarshall a flight ID and a number of
                 // tickets, and save that number of tickets in the DB using hibernate.
                 // TODO: unmarshall
-                // JSONSplitter.jsonSplitter(jsonText);
+                String[] uptickets = JSONSplitter.jsonSplitter(jsonText);
                 // TODO: setup objects, add data from unmarshalled JSON
                 Tickets_People_Flights addtpf = new Tickets_People_Flights(); // JSON{flight_id}, ticket_id,user_id
-                addtpf.setFlight();
-                
-                // TODO: have hibernate get flight obj by flight_id
-                // TODO: have hibernate get user obj by user_id
-                // TODO: set both as fields of addtpf
+                addtpf.setFlight(FlightService.getFlightById(Integer.parseInt(uptickets[3]))); // sets flight
+                addtpf.setPerson(PeopleService.getPersonById(3)); //not getting from JSON..
 
-                // TODO: call hibernate methods on objects
-                // TODO: call buyNewTicket on addtpf
+                // TODO: add a user_id to JSON OR use local user_id
+
+                TicketService.buyNewTicket(addtpf);
 
 //        "numberOfTickets": nots.value,
 //        "userFlightID": ufid.value,

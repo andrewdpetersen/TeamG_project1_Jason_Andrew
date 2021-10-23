@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
-public class zzServletTemplate extends HttpServlet {
+public class zzServletModelTemplate extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
@@ -44,8 +44,8 @@ public class zzServletTemplate extends HttpServlet {
                 // TODO: use setters to set field of ^
                 // TODO: if (we need data from hibernate)... DO IT
 
-                Tickets_People_Flights addtpf = new Tickets_People_Flights(); // JSON{flight_id}, ticket_id,user_id
-                addtpf.setFlight();
+//                Tickets_People_Flights addtpf = new Tickets_People_Flights(); // JSON{flight_id}, ticket_id,user_id
+//                addtpf.setFlight();
 
                 // TODO: call hibernate methods on objects
                 // TODO: write response logic.. such as "Ticket's purchased: 5, for Chicago to LA"
