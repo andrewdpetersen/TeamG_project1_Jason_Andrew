@@ -110,8 +110,9 @@ public class FlightService {
 
     //Maybe more get methods based on needs...
     public static void PilotTakeoffLock(Flights flight){
-    //TODO: find the flight in the database using hibernate
-    //TODO: change flag on flight to LOCKED... persiste' change
+        Flights takeoffFlight = session.load(Flights.class, flight.getFlight_id());
+        takeoffFlight.setLockedForTakeoff(true);
+        session.save(takeoffFlight);
     }
 
     public static Session getSession(){

@@ -31,10 +31,10 @@ public class Tickets_People_Flights {
     public Tickets_People_Flights() {
     }
 
-    public int getTicket_id() {
+    public Integer getTicket_id() {
         return ticket_id;
     }
-    public void setTicket_id(int ticket_id) {
+    public void setTicket_id(Integer ticket_id) {
         this.ticket_id = ticket_id;
     }
     public People getPerson() {return person;}

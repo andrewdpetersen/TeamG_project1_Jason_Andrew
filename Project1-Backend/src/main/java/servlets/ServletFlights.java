@@ -40,16 +40,19 @@ public class ServletFlights extends HttpServlet {
         switch(action){
             case "AdminScheduleFlight":
 
+                //jsonText comes from adminPortalAddFlights.js
                 String[] asflight = JSONSplitter.jsonSplitter(jsonText);
 
                 Flights newflight = new Flights();
-                newflight.setDeparture_city(asflight[1]);
-                newflight.setArrival_city(asflight[3]);
-                newflight.setDate(asflight[5]);
-                newflight.setTime(asflight[7]);
+                newflight.setDeparture_city(asflight[1]);//asflight[1] = departure_city.value
+                newflight.setArrival_city(asflight[3]);//asflight[3] = arrival_city.value
+                newflight.setDate(asflight[5]);//asflight[5] = flight_date.value
+                newflight.setTime(asflight[7]);//asflight[7] = flight_time.value
                 FlightService.saveNewFlight(newflight);
 
                 // TODO: write response logic.. such as "Ticket's purchased: 5, for Chicago to LA"
+                resp.getWriter().println("The flight from: "+asflight[1]+" to: "+asflight[3]+" has been scheduled");
+                resp.setStatus(200);
                 break;
             case "AdminCancelFlight":
 
@@ -67,7 +70,7 @@ public class ServletFlights extends HttpServlet {
                 String[] ptlock = JSONSplitter.jsonSplitter(jsonText);
 
                 Flights ptl = FlightService.getFlightById(Integer.parseInt(ptlock[1]));
-                FlightService.PilotTakeoffLock(ptl); // TODO create method in Services/FlightService
+                FlightService.PilotTakeoffLock(ptl);
 
                 // TODO: write response logic.. such as "Ticket's purchased: 5, for Chicago to LA"
                 break;

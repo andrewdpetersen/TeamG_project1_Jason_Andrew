@@ -37,10 +37,7 @@ public class ServletTickets extends HttpServlet {
 
         switch(action){
             case "UserPurchaseTickets":
-                //TODO: Write logic to add ticket(s) to DB here-
-                // unique to action and the servlet, for example:
-                // UserPurchaseTickets on tickets will need us to unmarshall a flight ID and a number of
-                // tickets, and save that number of tickets in the DB using hibernate.
+
                 String[] uptickets = JSONSplitter.jsonSplitter(jsonText);
 
                 Tickets_People_Flights addtpf = new Tickets_People_Flights(); // JSON{flight_id}, ticket_id,user_id
@@ -69,8 +66,8 @@ public class ServletTickets extends HttpServlet {
 
                 String[] ucheckin = JSONSplitter.jsonSplitter(jsonText);
 
-                Tickets_People_Flights ccheck = TicketService.getTicketByID(Integer.parseInt(ucheckin[2])); // TODO: write getTicketByID
-                TicketService.checkinTicket(ccheck); // TODO: change logic on server side // TODO: add checkinTicket under Services/TicketSerice.java
+                Tickets_People_Flights ccheck = TicketService.getTicketByID(Integer.parseInt(ucheckin[2]));
+                TicketService.checkinTicket(ccheck);
 //                Tickets_People_Flights addtpf = new Tickets_People_Flights(); // JSON{flight_id}, ticket_id,user_id
 //                addtpf.setFlight();
 

@@ -15,7 +15,7 @@ public class Flights {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int flight_id;
+    private Integer flight_id;
 
     @Column
     private String departure_city;
@@ -28,6 +28,9 @@ public class Flights {
 
     @Column
     private String time;
+
+    @Column
+    private Boolean lockedForTakeoff;
 
     @OneToMany(mappedBy = "ticket_id")
     private List<Tickets_People_Flights> ticketList;
@@ -73,5 +76,13 @@ public class Flights {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public Boolean getLockedForTakeoff() {
+        return lockedForTakeoff;
+    }
+
+    public void setLockedForTakeoff(Boolean lockedForTakeoff) {
+        this.lockedForTakeoff = lockedForTakeoff;
     }
 }
