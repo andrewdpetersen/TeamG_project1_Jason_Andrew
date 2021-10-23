@@ -33,7 +33,16 @@ public class TicketService {
     public static void cancelTicket (Tickets_People_Flights tpf){session.delete(tpf);} // Use the session to delete the Object tpf from database
 
     public static void cancelTicketByCustomerFlight(People customer, Flights flight){
-        //TODO: delete ticket(s) with matching customer and flight
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Tickets_People_Flights> query = builder.createQuery(Tickets_People_Flights.class);
+        Root<Tickets_People_Flights> root = query.from(Tickets_People_Flights.class);
+        query.select(root).where(builder.and(builder.equal(root.get("person"),customer),
+                builder.equal(root.get("flight"),flight)));
+        Query getUserTicketsOnFlight = session.createQuery(query);
+        List<Tickets_People_Flights> cancelledTickets= getUserTicketsOnFlight.getResultList();
+        for (Tickets_People_Flights ticket:cancelledTickets) {
+            session.delete(ticket);
+        }
     }
 
     public static Tickets_People_Flights getTicketByID(int ticket_id){
