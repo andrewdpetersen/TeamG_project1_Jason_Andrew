@@ -56,11 +56,29 @@ public class ServletTickets extends HttpServlet {
 //        "userFlightID": ufid.value,
                 break;
             case "UserCancelTicket":
-                //TODO: write logic to delete a ticket here
+
+                String[] ucticket = JSONSplitter.jsonSplitter(jsonText);
+
+                Tickets_People_Flights cticket = TicketService.getTicketByID(Integer.parseInt(ucticket[2])); // TODO: write getTicketByID
+                TicketService.cancelTicket(cticket); // TODO: change logic on server side
+//                Tickets_People_Flights addtpf = new Tickets_People_Flights(); // JSON{flight_id}, ticket_id,user_id
+//                addtpf.setFlight();
+
+                // TODO: write response logic.. such as "Ticket's purchased: 5, for Chicago to LA"
+                break;
 //        "userCancelTickeID": ucts.value
                 break;
             case "UserCheckin":
-                //TODO: write logic to checkIn here
+
+                String[] ucheckin = JSONSplitter.jsonSplitter(jsonText);
+
+                Tickets_People_Flights ccheck = TicketService.getTicketByID(Integer.parseInt(ucheckin[2])); // TODO: write getTicketByID
+                TicketService.checkinTicket(ccheck); // TODO: change logic on server side // TODO: add checkinTicket under Services/TicketSerice.java
+//                Tickets_People_Flights addtpf = new Tickets_People_Flights(); // JSON{flight_id}, ticket_id,user_id
+//                addtpf.setFlight();
+
+                // TODO: write response logic.. such as "Ticket's purchased: 5, for Chicago to LA"
+                break;
 //        "checkinTicketID": ctid.value,
         }
 
