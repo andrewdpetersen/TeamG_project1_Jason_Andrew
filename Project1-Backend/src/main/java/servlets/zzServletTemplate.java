@@ -8,13 +8,12 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
-public class ServletTickets extends HttpServlet {
+public class zzServletTemplate extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         /**
-         * The following is just testing my javascript to make sure it is working
-         * like I think it is...
+         * Servlet template
          */
         System.out.println("DEBUG- SERVER REACHED");//take this out after debug finished
 
@@ -32,16 +31,19 @@ public class ServletTickets extends HttpServlet {
 
         switch(action){
             case "UserPurchaseTickets":
-                //Write logic to add ticket(s) to DB here
+                //TODO: Write logic to add ticket(s) to DB here-
+                // unique to action and the servlet, for example:
+                // UserPurchaseTickets on tickets will need us to unmarshall a flight ID and a number of
+                // tickets, and save that number of tickets in the DB using hibernate.
 //        "numberOfTickets": nots.value,
 //        "userFlightID": ufid.value,
                 break;
             case "UserCancelTicket":
-                //write logic to delete a ticket here
+                //TODO: write logic to delete a ticket here
 //        "userCancelTickeID": ucts.value
                 break;
             case "UserCheckin":
-                //write logic to checkIn here
+                //TODO: write logic to checkIn here
 //        "checkinTicketID": ctid.value,
         }
 
