@@ -1,11 +1,11 @@
-const form = document.getElementById("user_checkin");
-form.addEventListener("submit",function(event) {
+let userportalcheckinform = document.getElementById("user_checkin");
+userportalcheckinform.addEventListener("submit",function(event) {
     event.preventDefault();//prevents the default "submit" event
-    const ctid = form.querySelector("#checkin_ticket_id");
-    SubmitForm();
+    SubmitUPCIForm();
 });
 
-async function SubmitForm() {
+async function SubmitUPCIForm() {
+    const ctid = userportalcheckinform.querySelector("#checkin_ticket_id");
     let object = {//creates an object in JSON format
         "checkinTicketID": ctid.value,//key is the variable we are assigning the value to
 

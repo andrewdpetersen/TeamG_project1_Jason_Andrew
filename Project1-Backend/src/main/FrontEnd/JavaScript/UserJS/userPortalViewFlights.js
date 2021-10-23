@@ -1,24 +1,20 @@
-const form = document.getElementById("user_view_flights");//
-form.addEventListener("submit",function(event) {
+let userportalviewflightsform = document.getElementById("user_view_flights");//
+userportalviewflightsform.addEventListener("submit",function(event) {
     event.preventDefault();//prevents the default "submit" event
-    const sdc = form.querySelector("#select_departureCity");
-    const sac = form.querySelector("#select_arrivalCity");
-    SubmitForm();
+    SubmitUPVFForm();
 });
 
-async function SubmitForm() {
-    let object = {//creates an object in JSON format
-        "selectDepartureCity": sdc.value,//key is the variable we are assigning the value to
-        "selectArrivalCity": sac.value,//the value comes from form input
-    }
+async function SubmitUPVFForm() {
+    const selectDepCity = userportalviewflightsform.querySelector("#select_departureCity");
+    const sac = userportalviewflightsform.querySelector("#select_arrivalCity");
 
     let response = await fetch("http://localhost:8080/Project1-Backend/flights", {
-        method: "GET",
+        method: "GET",//NO BODY on GET requests
         headers: {"Content-Type": "application/json",
-        "Servlet-action" : "UserViewFlights"
+        "Servlet-action" : "UserViewFlights",
+            "selectDepartureCity": selectDepCity.value,
+            "selectArrivalCity": sac.value//the value comes from form input
         },
-        //one to add an object, one to update, one to delete, one to get one object, one to get a list
-        body: JSON.stringify(object)//makes the json into a string to send
     });
 }
 

@@ -1,11 +1,11 @@
-const form = document.getElementById("user_cancel_tickets");
-form.addEventListener("submit",function(event) {
+let userportalcancelform = document.getElementById("user_cancel_tickets");
+userportalcancelform.addEventListener("submit",function(event) {
     event.preventDefault();//prevents the default "submit" event
-    const ucts = form.querySelector("#user_cancel_ticket_id");
-    SubmitForm();
+    SubmitUPCTForm();
 });
 
-async function SubmitForm() {
+async function SubmitUPCTForm() {
+    const ucts = userportalcancelform.querySelector("#user_cancel_ticket_id");
     let object = {//creates an object in JSON format
         "userCancelTickeID": ucts.value,//assigning the value to send to servlet via fetch.
     }

@@ -1,12 +1,15 @@
-const form = document.getElementById("user_purchase_tickets");//T
-form.addEventListener("submit",function(event) {
+var dbg = true;
+if(dbg){console.log("DEBUG- ScriptReached");}
+let userportalbuyticketsform = document.getElementById("user_purchase_tickets");//T
+userportalbuyticketsform.addEventListener("submit",function(event) {
     event.preventDefault();//prevents the default "submit" event
-    const nots = form.querySelector("#numberOfTickets");
-    const ufid = form.querySelector("#userFlightID");
-    SubmitForm();
+    if(dbg){console.log("DEBUG- EventListener Added");}
+    SubmitUPBTForm();
 });
 
-async function SubmitForm() {
+async function SubmitUPBTForm() {
+    const nots = userportalbuyticketsform.querySelector("#numberOfTickets");
+    const ufid = userportalbuyticketsform.querySelector("#userFlightID");
     let object = {//creates an object in JSON format
         "numberOfTickets": nots.value,//key is the variable we are assigning the value to
         "userFlightID": ufid.value,//the value comes from form input
