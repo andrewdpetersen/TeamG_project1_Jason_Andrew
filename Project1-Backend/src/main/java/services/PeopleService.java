@@ -45,11 +45,14 @@ public class PeopleService {
     }
 
     public static People getPersonByUsername(String username){
+        System.out.println("DEBUG: method called");
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<People> query = builder.createQuery(People.class);
         Root<People> root = query.from(People.class);
+        System.out.println("DEBUG: root set");
         query.select(root).where(builder.equal(root.get("username"),username));
         Query getPerson = session.createQuery(query);
+        System.out.println("DEBUG: session creates query");
         return (People) getPerson.getSingleResult();
     }
     /**

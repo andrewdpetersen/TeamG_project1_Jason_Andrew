@@ -1,14 +1,14 @@
 const form = document.getElementById("add_flight");
 form.addEventListener("submit",function(event) {
     event.preventDefault();//prevents the default "submit" event
-    const departure_city = form.querySelector("#departureCity");//TODO: assign variable names and
-    const arrival_city = form.querySelector("#arrivalCity");//TODO: replace ids with correct ids
-    const flight_date = form.querySelector("#flightDate");//from HTML
-    const flight_time = form.querySelector("#flightTime");//from HTML
     SubmitForm();
 });
 
 async function SubmitForm() {
+    const departure_city = form.querySelector("#departureCity");
+    const arrival_city = form.querySelector("#arrivalCity");
+    const flight_date = form.querySelector("#flightDate");
+    const flight_time = form.querySelector("#flightTime");
     let newFlight = {//creates an object in JSON format
         "departureCity": departure_city.value,
         "arrivalCity": arrival_city.value,

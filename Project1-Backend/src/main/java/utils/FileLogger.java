@@ -15,7 +15,7 @@ public class FileLogger {
     private FileLogger() {
         printToConsole = false;
         printToConsoleTemp = false;
-        threshold = 3;
+        threshold = 0;
     }
 
     public static FileLogger getFileLogger(){

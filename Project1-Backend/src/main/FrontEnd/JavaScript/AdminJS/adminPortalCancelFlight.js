@@ -1,11 +1,11 @@
 const form = document.getElementById("cancel_flight");
 form.addEventListener("submit",function(event) {
     event.preventDefault();//prevents the default "submit" event
-    const flight_id = form.querySelector("#flightID");
     SubmitForm();
 });
 
 async function SubmitForm() {
+    const flight_id = form.querySelector("#flightID");
     let cancelledFlight = {//creates an object in JSON format
         "flight_id": flightID.value,
     }

@@ -1,13 +1,12 @@
 const form = document.getElementById("takeoff_lock");
 form.addEventListener("submit",function(event) {
     event.preventDefault();//prevents the default "submit" event
-    const fid = form.querySelector("#flightID");
-    const spin = form.querySelector("#specialPin");
-
     SubmitForm();
 });
 
 async function SubmitForm() {
+    const fid = form.querySelector("#flightID");
+    const spin = form.querySelector("#specialPin");
     let object = {//creates an object in JSON format
         "flightID": fid.value,//key is the variable we are assigning the value to
         "specialPin": spin.value,//the value comes from form input
