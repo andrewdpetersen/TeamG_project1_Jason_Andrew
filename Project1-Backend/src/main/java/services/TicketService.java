@@ -55,8 +55,14 @@ public class TicketService {
     }
 
     public static void checkinTicket(Tickets_People_Flights ticket){
-        //TODO: get ticket and change flag to checked-in
-
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Tickets_People_Flights> query = builder.createQuery(Tickets_People_Flights.class);
+        Root<Tickets_People_Flights> root = query.from(Tickets_People_Flights.class);
+        query.select(root).where(builder.equal(root.get("ticket_id"),ticket.getTicket_id()));
+        Query checkTicketQuery = session.createQuery(query);
+        Tickets_People_Flights checkTicket = (Tickets_People_Flights) checkTicketQuery.getSingleResult();
+        //Ticket is in checkTicket reference, just need to change field to "checked in"
+        checkTicket.setChecked_in(true);
     }
     // User - LOOKUP a ticket
     //public static Tickets_People_Flights lookUpTicket (int ticket_id){

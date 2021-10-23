@@ -16,6 +16,9 @@ public class Tickets_People_Flights {
     private Integer ticket_id;
 
     @Column
+    private Boolean checked_in;
+
+    @Column
     @ManyToOne
     @JoinColumn(name = "people_id")
     private People person;
@@ -38,4 +41,10 @@ public class Tickets_People_Flights {
     public void setPerson(People person) {this.person = person;}
     public Flights getFlight() {return flight;}
     public void setFlight(Flights flight) {this.flight = flight;}
+    public Boolean getChecked_in() {
+        return checked_in;
+    }
+    public void setChecked_in(Boolean checked_in) {
+        this.checked_in = checked_in;
+    }
 }
