@@ -1,15 +1,15 @@
-const form = document.getElementById("admin_flight_manifest");//
-form.addEventListener("submit",function(event) {
+const adminManifestForm = document.getElementById("admin_flight_manifest");//
+adminManifestForm.addEventListener("submit",function(event) {
     event.preventDefault();//prevents the default "submit" event
-    SubmitForm();
+    SubmitAdminFlightManifestForm();
 });
 
-async function SubmitForm() {
-    const fid = form.querySelector("#flightID");
+async function SubmitAdminFlightManifestForm() {
+    const fid = adminManifestForm.querySelector("#cancel_flightID");
     let response = await fetch("http://localhost:8080/Project1-Backend/flights", {
         method: "GET",
         headers: {"Content-Type": "application/json",
-            "Servlet-Action": "AdminFlightManifest",
+            "Servlet-action": "AdminFlightManifest",
             "flightID": fid.value},
     });
     var queryString = "?flightID="+fid.value;

@@ -56,28 +56,34 @@ public class ServletFlights extends HttpServlet {
                 break;
             case "AdminCancelFlight":
 
+                System.out.println("DEBUG: AdminCancelFlight reached");
                 String[] acflight = JSONSplitter.jsonSplitter(jsonText);
 
+                System.out.println(acflight[2]);
+                System.out.println(acflight[2].substring(1,acflight[2].length()-1));
+                String acflight2 = acflight[2].substring(1,acflight[2].length()-1);
+                Flights acf = FlightService.getFlightById(Integer.parseInt(acflight2));
+                System.out.println("DEBUG: flight_id parsed");
 
-                Flights acf = FlightService.getFlightById(Integer.parseInt(acflight[1]));
                 FlightService.deleteFlight(acf);
 
-                resp.getWriter().println("Flight id: "+acflight[1]+" has been cancelled");
+                resp.getWriter().println("Flight id: "+acflight[2]+" has been cancelled");
                 resp.setStatus(200);
                 break;
 
             case "PilotTakeoffLock":
                 System.out.println("DEBUG: PilotTakeoffLock case reached");
                 String[] ptlock = JSONSplitter.jsonSplitter(jsonText);
-                System.out.println("DEBUG "+ptlock[2]);
-                System.out.println(Integer.valueOf(ptlock[2]));
-                Integer flight_id = Integer.valueOf(ptlock[2]);
+
+                //Need to keep this!!!!!!!
+                String ptlock2 = ptlock[2].substring(1,ptlock[2].length()-1);
+
+                Integer flight_id = Integer.valueOf(ptlock2);
                 System.out.println("DEBUG: FlightID parsed");
 
-
-                Flights ptl = FlightService.getFlightById(Integer.parseInt(ptlock[1]));
+                Flights ptl = FlightService.getFlightById(flight_id);
                 if(dbg){
-                    System.out.println("DEBUG: getFlightById called");}
+                    System.out.println("DEBUG: getFlightById success");}
                 FlightService.PilotTakeoffLock(ptl);
 
                 resp.getWriter().println("Flight id: "+ptlock[1]+" is locked and ready for takeoff");

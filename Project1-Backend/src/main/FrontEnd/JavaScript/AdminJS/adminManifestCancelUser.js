@@ -16,7 +16,7 @@ async function SubmitForm() {
     let response = await fetch("http://localhost:8080/Project1-Backend/people", {
         method: "POST",
         headers: {"Content-Type": "application/json",
-        "Servlet-Action" : "DeleteCustomerFlight"
+        "Servlet-action" : "DeleteCustomerFlight"
         },
         //one to add an object, one to update, one to delete, one to get one object, one to get a list
         body: JSON.stringify(object)//makes the json into a string to send

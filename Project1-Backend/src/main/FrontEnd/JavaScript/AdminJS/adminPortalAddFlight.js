@@ -1,14 +1,14 @@
-const form = document.getElementById("add_flight");
-form.addEventListener("submit",function(event) {
+const adminAddForm = document.getElementById("add_flight");
+adminAddForm.addEventListener("submit",function(event) {
     event.preventDefault();//prevents the default "submit" event
-    SubmitForm();
+    SubmitAdminAddFlightForm();
 });
 
-async function SubmitForm() {
-    const departure_city = form.querySelector("#departureCity");
-    const arrival_city = form.querySelector("#arrivalCity");
-    const flight_date = form.querySelector("#flightDate");
-    const flight_time = form.querySelector("#flightTime");
+async function SubmitAdminAddFlightForm() {
+    const departure_city = adminAddForm.querySelector("#departureCity");
+    const arrival_city = adminAddForm.querySelector("#arrivalCity");
+    const flight_date = adminAddForm.querySelector("#flightDate");
+    const flight_time = adminAddForm.querySelector("#flightTime");
     let newFlight = {//creates an object in JSON format
         "departureCity": departure_city.value,
         "arrivalCity": arrival_city.value,
@@ -18,7 +18,7 @@ async function SubmitForm() {
     let response = await fetch("http://localhost:8080/Project1-Backend/flights", {
         method: "POST",
         headers: {"Content-Type": "application/json",
-        "Servlet-Action": "AdminScheduleFlight"},
+        "Servlet-action": "AdminScheduleFlight"},
         body: JSON.stringify(newFlight)//makes the json into a string to send
     });
 }
