@@ -89,6 +89,15 @@ public class FlightService {
      */
     public static List<Flights> getFlightsByArrivalDestination(String departureCity, String arrivalCity){
         List<Flights> flightsList = new LinkedList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Flights> query = builder.createQuery(Flights.class);
+        Root<Flights> root = query.from(Flights.class);
+        query.select(root).where(builder.and(builder.equal(root.get("departure_city"),departureCity),
+                builder.equal(root.get("arrival_city"),arrivalCity)));
+        Query userFlightsByDepAndArr = session.createQuery(query);
+        return userFlightsByDepAndArr.getResultList();
+
+
         return flightsList;
     }
 

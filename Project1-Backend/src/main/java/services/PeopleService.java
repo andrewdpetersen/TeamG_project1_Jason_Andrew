@@ -16,12 +16,6 @@ public class PeopleService {
     private static SessionFactory sessionFactory = HibernateManagement.getSessionFactory();
 
     /**
-     * It is unclear if this initialization method is necessary now that we are
-     * using hibernate rather than a direct repo.
-     */
-    public static void init(){}  // used for repos... might not need anymore. TODO: DELETE
-
-    /**
      * This method saves a People instance to our database
      * @param person
      */
@@ -51,7 +45,6 @@ public class PeopleService {
     }
 
     public static People getPersonByUsername(String username){
-        //TODO: search database for username, return corresponding person
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<People> query = builder.createQuery(People.class);
         Root<People> root = query.from(People.class);
