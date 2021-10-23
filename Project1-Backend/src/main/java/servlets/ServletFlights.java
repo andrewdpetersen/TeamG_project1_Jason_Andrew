@@ -20,11 +20,11 @@ import java.util.Scanner;
 public class ServletFlights extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
+        boolean dbg =true;
         /**
          * Servlet template
          */
-        System.out.println("DEBUG- SERVER REACHED");//take this out after debug finished
+        System.out.println("DEBUG- ServletFlights REACHED");//take this out after debug finished
 
         //These lines read the request body and put it into a string called jsonText
         InputStream requestBody = req.getInputStream();
@@ -67,10 +67,17 @@ public class ServletFlights extends HttpServlet {
                 break;
 
             case "PilotTakeoffLock":
-
+                System.out.println("DEBUG: PilotTakeoffLock case reached");
                 String[] ptlock = JSONSplitter.jsonSplitter(jsonText);
+                System.out.println("DEBUG "+ptlock[2]);
+                System.out.println(Integer.valueOf(ptlock[2]));
+                Integer flight_id = Integer.valueOf(ptlock[2]);
+                System.out.println("DEBUG: FlightID parsed");
+
 
                 Flights ptl = FlightService.getFlightById(Integer.parseInt(ptlock[1]));
+                if(dbg){
+                    System.out.println("DEBUG: getFlightById called");}
                 FlightService.PilotTakeoffLock(ptl);
 
                 resp.getWriter().println("Flight id: "+ptlock[1]+" is locked and ready for takeoff");

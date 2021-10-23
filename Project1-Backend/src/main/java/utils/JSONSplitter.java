@@ -8,9 +8,6 @@ public class JSONSplitter {
          * of size 2 being the key and corresponding value.
          */
         String[] firstSplit = json.split("[{:,}]");
-        for (String s:firstSplit) {
-            System.out.println(s);
-        }
         return firstSplit;
     }
 }

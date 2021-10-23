@@ -38,6 +38,7 @@ public class FlightService {
      */
     //This doesn't need a unit test
     public static Flights getFlightById(int flight_id){
+        System.out.println("DEBUG: getFlightById method called");
         return session.get(Flights.class, flight_id);
     }
 
@@ -110,7 +111,9 @@ public class FlightService {
 
     //Maybe more get methods based on needs...
     public static void PilotTakeoffLock(Flights flight){
+        System.out.println("DEBUG: PilotTakeoffLock method called");
         Flights takeoffFlight = session.load(Flights.class, flight.getFlight_id());
+        System.out.println("DEBUG: session.load flight successful");
         takeoffFlight.setLockedForTakeoff(true);
         session.save(takeoffFlight);
     }
