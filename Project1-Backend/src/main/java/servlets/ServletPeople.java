@@ -59,6 +59,9 @@ public class ServletPeople extends HttpServlet {
                 lcustomer.getAccess_level(); // TODO: send this back in JSON
 
                 // TODO: write response logic.. such as "Welcome Mr. Park".. send to portal based on accessLevel
+                resp.getWriter().write(lcustomer.getAccess_level());
+                resp.setStatus(200);
+
                 break;
         }
 

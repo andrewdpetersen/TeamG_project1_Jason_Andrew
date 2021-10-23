@@ -93,11 +93,12 @@ public class ServletFlights extends HttpServlet {
                 String manifestJSON = "{";
                 for (People passenger:passengerManifest) {
                     manifestJSON = manifestJSON+"people_id:"+passenger.getPeople_id()+","+
-                            "username:"+passenger.getUsername()+",";
+                            "username:"+passenger.getUsername()+",\n";
                 }
                 manifestJSON= manifestJSON+"}";
                 // TODO send manifestJSON using JavaScript to AdminViewManifest
                 // TODO: google how to send JSON back to html page
+                resp.getWriter().write(manifestJSON);
 
                 break;
             case "UserViewFlights":
@@ -105,15 +106,18 @@ public class ServletFlights extends HttpServlet {
                 List<Flights> flightSchedule = FlightService.getFlightsByArrivalDestination(req.getHeader("selectDepartureCity"), req.getHeader("selectArrivalCity"));
                 String flightScheduleJSON = "{";
                 for (Flights flight:flightSchedule) {
-                    flightScheduleJSON = flightScheduleJSON+"{flight_id:"+flight.getFlight_id()+","+
-                            "departure_city:"+flight.getDeparture_city()+","+
-                            "arrival_city:"+flight.getArrival_city()+"},";
+                    resp.getWriter().println("Flight ID: "+flight.getFlight_id()+" from: "+
+                            flight.getDeparture_city()+" to: "+flight.getArrival_city());
+//                    flightScheduleJSON = flightScheduleJSON+"{flight_id:"+flight.getFlight_id()+","+
+//                            "departure_city:"+flight.getDeparture_city()+","+
+//                            "arrival_city:"+flight.getArrival_city()+"},";
                 }
-                flightScheduleJSON = flightScheduleJSON+"}";
+                resp.setStatus(200);
+//                flightScheduleJSON = flightScheduleJSON+"}";
                 //TODO: send flightScheduleJSON using JS to
                 // TODO: google how to send JSON back to html page
-                //maybe just send as plaintext string
-                resp.getWriter().println("Flight ID: "+);
+                //TODO: maybe just send as plaintext string?
+
 
                 break;
         }
