@@ -4,6 +4,7 @@ import models.People;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -51,6 +52,12 @@ public class PeopleService {
 
     public static People getPersonByUsername(String username){
         //TODO: search database for username, return corresponding person
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<People> query = builder.createQuery(People.class);
+        Root<People> root = query.from(People.class);
+        query.select(root).where(builder.equal(root.get("username"),username));
+        Query getPerson = session.createQuery(query);
+        return (People) getPerson.getSingleResult();
     }
     /**
      * This method is incomplete, we need to complete the hibernate logic on it.
