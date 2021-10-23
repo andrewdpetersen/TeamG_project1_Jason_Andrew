@@ -96,9 +96,6 @@ public class FlightService {
                 builder.equal(root.get("arrival_city"),arrivalCity)));
         Query userFlightsByDepAndArr = session.createQuery(query);
         return userFlightsByDepAndArr.getResultList();
-
-
-        return flightsList;
     }
 
     /**
