@@ -1,13 +1,13 @@
 const form = document.getElementById("user_checkin");
 form.addEventListener("submit",function(event) {
     event.preventDefault();//prevents the default "submit" event
-    const checkinTicketId = form.querySelector("#checkin_ticket_id");
+    const ctid = form.querySelector("#checkin_ticket_id");
     SubmitForm();
 });
 
 async function SubmitForm() {
     let object = {//creates an object in JSON format
-        "ctid": checkinTicketId.value,//key is the variable we are assigning the value to
+        "checkinTicketID": ctid.value,//key is the variable we are assigning the value to
 
     }
     let response = await fetch("http://localhost:8080/Project1-Backend/tickets", {

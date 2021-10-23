@@ -10,7 +10,6 @@ async function SubmitForm() {
     let object = {//creates an object in JSON format
         "numberOfTickets": nots.value,//key is the variable we are assigning the value to
         "userFlightID": ufid.value,//the value comes from form input
-        "key3": nameOfVariable3.value
     }
     let response = await fetch("http://localhost:8080/Project1-Backend/tickets", {
         method: "POST",

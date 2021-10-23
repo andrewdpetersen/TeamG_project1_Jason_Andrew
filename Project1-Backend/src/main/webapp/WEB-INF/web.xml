@@ -16,16 +16,6 @@
         <listener-class>servlets.DependencyLoaderListener</listener-class>
     </listener>
 
-    <servlet><!--MANAGER-->
-        <servlet-name>ServletManager</servlet-name>
-        <servlet-class>servlets.ServletManager</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>ServletManager</servlet-name>
-        <url-pattern>/manager</url-pattern>
-    </servlet-mapping>
-
     <servlet><!--TICKETS-->
         <servlet-name>ServletTickets</servlet-name>
         <servlet-class>servlets.ServletTickets</servlet-class>
