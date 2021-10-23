@@ -49,6 +49,9 @@ public class PeopleService {
         return session.createQuery(query).getResultList();
     }
 
+    public static People getPersonByUsername(String username){
+        //TODO: search database for username, return corresponding person
+    }
     /**
      * This method is incomplete, we need to complete the hibernate logic on it.
      * @param flight_id

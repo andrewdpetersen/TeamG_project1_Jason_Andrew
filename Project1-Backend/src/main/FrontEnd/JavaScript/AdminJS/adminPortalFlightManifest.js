@@ -6,15 +6,11 @@ form.addEventListener("submit",function(event) {
 });
 
 async function SubmitForm() {
-    let object = {//creates an object in JSON format
-        "flightID": fid.value,//key is the variable we are assigning the value to
-    }
     let response = await fetch("http://localhost:8080/Project1-Backend/flights", {
         method: "GET",
         headers: {"Content-Type": "application/json",
-            "Servlet-Action": "AdminFlightManifest"},
-        //one to add an object, one to update, one to delete, one to get one object, one to get a list
-        body: JSON.stringify(object)//makes the json into a string to send
+            "Servlet-Action": "AdminFlightManifest",
+            "flightID": fid.value},
     });
 }
 

@@ -102,9 +102,11 @@ public class FlightService {
     }
 
 
-    //Maybe more get methods based on needs
-
-
+    //Maybe more get methods based on needs...
+    public static void PilotTakeoffLock(Flights flight){
+    //TODO: find the flight in the database using hibernate
+    //TODO: change flag on flight to LOCKED... persiste' change
+    }
 
     public static Session getSession(){
         return session;
@@ -120,6 +122,11 @@ public class FlightService {
     public static void setSessionFactory(SessionFactory sessionFactory) {
         FlightService.sessionFactory = sessionFactory;
     }
+
+
+
+
+
 
 
 }

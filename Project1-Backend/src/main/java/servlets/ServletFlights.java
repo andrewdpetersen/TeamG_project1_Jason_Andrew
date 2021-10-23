@@ -1,6 +1,7 @@
 package servlets;
 
 import models.Flights;
+import models.People;
 import models.Tickets_People_Flights;
 import services.FlightService;
 import services.PeopleService;
@@ -81,11 +82,14 @@ public class ServletFlights extends HttpServlet {
         switch(sa){
             case "AdminFlightManifest":
                 // need flight_id
-                FlightService.getFlightById(flight_id); //TODO: send flight_id through header... in AdminPortal/AdminPortalFlightManifest
-                
+                FlightService.getFlightById(Integer.parseInt(req.getHeader("flightID")));
+                PeopleService.getPassengersByFlight(Integer.parseInt(req.getHeader("flightID"))); // might need to change this method... using flights Object
+                // TODO respond to client w/ list using JavaScript
                 break;
             case "UserViewFlights":
                 // need departure_city and arrival_city
+                FlightService.getFlightsByArrivalDestination(req.getHeader("selectDepartureCity"), req.getHeader("selectArrivalCity"));
+                //TODO: repond to client w/ flight list
 
                 break;
         }

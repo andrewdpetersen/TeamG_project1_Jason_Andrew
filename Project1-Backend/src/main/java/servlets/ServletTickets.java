@@ -66,8 +66,6 @@ public class ServletTickets extends HttpServlet {
 
                 // TODO: write response logic.. such as "Ticket's purchased: 5, for Chicago to LA"
                 break;
-//        "userCancelTickeID": ucts.value
-                break;
             case "UserCheckin":
 
                 String[] ucheckin = JSONSplitter.jsonSplitter(jsonText);
