@@ -45,13 +45,21 @@ public class ServletFlights extends HttpServlet {
                 String[] asflight = JSONSplitter.jsonSplitter(jsonText);
 
                 Flights newflight = new Flights();
-                newflight.setDeparture_city(asflight[1]);//asflight[1] = departure_city.value
-                newflight.setArrival_city(asflight[3]);//asflight[3] = arrival_city.value
-                newflight.setDate(asflight[5]);//asflight[5] = flight_date.value
-                newflight.setTime(asflight[7]);//asflight[7] = flight_time.value
+
+                String asflightDepart = asflight[2].substring(1,asflight[2].length()-1);
+                String asflightArrive = asflight[4].substring(1,asflight[4].length()-1);
+                String asflightDate = asflight[6].substring(1,asflight[6].length()-1);
+                String asflightTime = asflight[8].substring(1,asflight[8].length()-1);
+
+                newflight.setDeparture_city(asflight[2]);//asflight[2] = departure_city.value
+                newflight.setArrival_city(asflight[4]);//asflight[4] = arrival_city.value
+                newflight.setDate(asflight[6]);//asflight[6] = flight_date.value
+                newflight.setTime(asflight[8]);//asflight[8] = flight_time.value
+
+
                 FlightService.saveNewFlight(newflight);
 
-                resp.getWriter().println("The flight from: "+asflight[1]+" to: "+asflight[3]+" has been scheduled");
+                resp.getWriter().println("The flight from: "+asflight[2]+" to: "+asflight[4]+" has been scheduled");
                 resp.setStatus(200);
                 break;
             case "AdminCancelFlight":
@@ -59,8 +67,6 @@ public class ServletFlights extends HttpServlet {
                 System.out.println("DEBUG: AdminCancelFlight reached");
                 String[] acflight = JSONSplitter.jsonSplitter(jsonText);
 
-                System.out.println(acflight[2]);
-                System.out.println(acflight[2].substring(1,acflight[2].length()-1));
                 String acflight2 = acflight[2].substring(1,acflight[2].length()-1);
                 Flights acf = FlightService.getFlightById(Integer.parseInt(acflight2));
                 System.out.println("DEBUG: flight_id parsed");

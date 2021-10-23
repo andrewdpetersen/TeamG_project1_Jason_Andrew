@@ -28,7 +28,9 @@ public class FlightService {
      */
     //This doesn't need a unit test
     public static void saveNewFlight(Flights flight){
+        System.out.println("DEBUG: saveNewFlight method called");
         session.save(flight);
+        System.out.println("DEBUG: Flight saved in DB");
     }
 
     /**

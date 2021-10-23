@@ -5,14 +5,14 @@ adminManifestForm.addEventListener("submit",function(event) {
 });
 
 async function SubmitAdminFlightManifestForm() {
-    const fid = adminManifestForm.querySelector("#cancel_flightID");
+    const manifestFlight_id = adminManifestForm.querySelector("#manifest_flightID");
     let response = await fetch("http://localhost:8080/Project1-Backend/flights", {
         method: "GET",
         headers: {"Content-Type": "application/json",
             "Servlet-action": "AdminFlightManifest",
-            "flightID": fid.value},
+            "flightID": manifestFlight_id.value},
     });
-    var queryString = "?flightID="+fid.value;
+    var queryString = "?flightID="+manifestFlight_id.value;
     window.location.href = "AdminViewManifest.html"+queryString;
 }
 
