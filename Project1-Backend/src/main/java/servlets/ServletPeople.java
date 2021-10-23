@@ -1,5 +1,6 @@
 package servlets;
 
+import models.Flights;
 import models.People;
 import models.Tickets_People_Flights;
 import services.FlightService;
@@ -25,7 +26,7 @@ public class ServletPeople extends HttpServlet {
         System.out.println("DEBUG- SERVER REACHED");//take this out after debug finished
 
         //These lines read the request body and put it into a string called jsonText
-        InputStream requestBody = req.getInputStream();
+        InputStream requestBody = req.getInputStream(); // from java.util
         Scanner sc = new Scanner(requestBody, StandardCharsets.UTF_8.name());
         String jsonText = sc.useDelimiter("\\A").next();
         //This will be a set of key-value pairs, like "numberOfTickets": 3, "userFlightID":4, "userCancelTickeID": 4
@@ -38,27 +39,24 @@ public class ServletPeople extends HttpServlet {
 
         switch(action){
             case "DeleteCustomerFlight":
-                //TODO: Write logic to add ticket(s) to DB here-
-                // unique to action and the servlet, for example:
-                // UserPurchaseTickets on tickets will need us to unmarshall a flight ID and a number of
-                // tickets, and save that number of tickets in the DB using hibernate.
-                // TODO: unmarshall
+
                 String[] dcflight =JSONSplitter.jsonSplitter(jsonText);
                 People dcustomer = PeopleService.getPersonById(Integer.parseInt(dcflight[1]));
-                // TODO: setup objects, add data from unmarshalled JSON
-                // TODO: instantiate new object of type ________
-                // TODO: use setters to set field of ^
-                // TODO: if (we need data from hibernate)... DO IT
+                Flights dflight = FlightService.getFlightById(Integer.parseInt()); //TODO: modify JavaScript to send
 
-//                Tickets_People_Flights addtpf = new Tickets_People_Flights(); // JSON{flight_id}, ticket_id,user_id
-//                addtpf.setFlight();
+                // TODO: delete using dcustomer and dflight
+                TicketService.cancelTicketByCustomerFlight(dcustomer,dflight); //TODO write method in Services/TicketService.js
 
-                // TODO: call hibernate methods on objects
                 // TODO: write response logic.. such as "Ticket's purchased: 5, for Chicago to LA"
                 break;
             case "Login":
-                //TODO: write logic to delete a ticket here
-//        "userCancelTickeID": ucts.value
+
+                String[] loginfo =JSONSplitter.jsonSplitter(jsonText); //TODO write objects People, Flights, Tickets to get info from this line.
+
+                People lcustomer = PeopleService.getPersonByUsername(loginfo[1]); //TODO write method in Services/PeopleService
+                lcustomer.getAccess_level(); // TODO: send this back in JSON
+
+                // TODO: write response logic.. such as "Welcome Mr. Park".. send to portal based on accessLevel
                 break;
         }
 
