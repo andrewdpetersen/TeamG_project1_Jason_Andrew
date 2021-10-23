@@ -6,6 +6,10 @@ import models.Tickets_People_Flights;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 public class TicketService {
@@ -33,7 +37,12 @@ public class TicketService {
     }
 
     public static Tickets_People_Flights getTicketByID(int ticket_id){
-        //TODO: return a ticket by id#
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Tickets_People_Flights> query = builder.createQuery(Tickets_People_Flights.class);
+        Root<Tickets_People_Flights> root = query.from(Tickets_People_Flights.class);
+        query.select(root).where(builder.equal(root.get("ticket_id"),ticket_id));
+        Query getTicket = session.createQuery(query);
+        return (Tickets_People_Flights) getTicket.getSingleResult();
     }
 
     public static void checkinTicket(Tickets_People_Flights ticket){
