@@ -14,7 +14,7 @@ import java.util.List;
 
 public class FlightService {
     private static Session session = HibernateManagement.getSession();
-    private static SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory = HibernateManagement.getSessionFactory();
 
     /**
      * It is unclear if this initialization method is necessary now that we are
