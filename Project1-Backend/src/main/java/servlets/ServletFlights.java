@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Scanner;
 
 public class ServletFlights extends HttpServlet {
@@ -87,13 +88,32 @@ public class ServletFlights extends HttpServlet {
             case "AdminFlightManifest":
                 // need flight_id
                 FlightService.getFlightById(Integer.parseInt(req.getHeader("flightID")));
-                PeopleService.getPassengersByFlight(Integer.parseInt(req.getHeader("flightID"))); // might need to change this method... using flights Object
-                // TODO respond to client w/ list using JavaScript
+                List<People> passengerManifest = PeopleService.getPassengersByFlight(Integer.parseInt(req.getHeader("flightID"))); // might need to change this method... using flights Object
+
+                String manifestJSON = "{";
+                for (People passenger:passengerManifest) {
+                    manifestJSON = manifestJSON+"people_id:"+passenger.getPeople_id()+","+
+                            "username:"+passenger.getUsername()+",";
+                }
+                manifestJSON= manifestJSON+"}";
+                // TODO send manifestJSON using JavaScript to AdminViewManifest
+                // TODO: google how to send JSON back to html page
+
                 break;
             case "UserViewFlights":
                 // need departure_city and arrival_city
-                FlightService.getFlightsByArrivalDestination(req.getHeader("selectDepartureCity"), req.getHeader("selectArrivalCity"));
-                //TODO: repond to client w/ flight list
+                List<Flights> flightSchedule = FlightService.getFlightsByArrivalDestination(req.getHeader("selectDepartureCity"), req.getHeader("selectArrivalCity"));
+                String flightScheduleJSON = "{";
+                for (Flights flight:flightSchedule) {
+                    flightScheduleJSON = flightScheduleJSON+"{flight_id:"+flight.getFlight_id()+","+
+                            "departure_city:"+flight.getDeparture_city()+","+
+                            "arrival_city:"+flight.getArrival_city()+"},";
+                }
+                flightScheduleJSON = flightScheduleJSON+"}";
+                //TODO: send flightScheduleJSON using JS to
+                // TODO: google how to send JSON back to html page
+                //maybe just send as plaintext string
+                resp.getWriter().println("Flight ID: "+);
 
                 break;
         }
