@@ -56,6 +56,7 @@ public class TicketService {
 
     public static void checkinTicket(Tickets_People_Flights ticket){
         //TODO: get ticket and change flag to checked-in
+
     }
     // User - LOOKUP a ticket
     //public static Tickets_People_Flights lookUpTicket (int ticket_id){

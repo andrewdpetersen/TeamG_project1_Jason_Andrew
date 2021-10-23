@@ -41,9 +41,8 @@ public class ServletTickets extends HttpServlet {
                 // unique to action and the servlet, for example:
                 // UserPurchaseTickets on tickets will need us to unmarshall a flight ID and a number of
                 // tickets, and save that number of tickets in the DB using hibernate.
-                // TODO: unmarshall
                 String[] uptickets = JSONSplitter.jsonSplitter(jsonText);
-                // TODO: setup objects, add data from unmarshalled JSON
+
                 Tickets_People_Flights addtpf = new Tickets_People_Flights(); // JSON{flight_id}, ticket_id,user_id
                 addtpf.setFlight(FlightService.getFlightById(Integer.parseInt(uptickets[3]))); // sets flight
                 addtpf.setPerson(PeopleService.getPersonById(3)); //not getting from JSON..
@@ -60,7 +59,7 @@ public class ServletTickets extends HttpServlet {
                 String[] ucticket = JSONSplitter.jsonSplitter(jsonText);
 
                 Tickets_People_Flights cticket = TicketService.getTicketByID(Integer.parseInt(ucticket[2])); // TODO: write getTicketByID
-                TicketService.cancelTicket(cticket); // TODO: change logic on server side
+                TicketService.cancelTicket(cticket);
 //                Tickets_People_Flights addtpf = new Tickets_People_Flights(); // JSON{flight_id}, ticket_id,user_id
 //                addtpf.setFlight();
 
