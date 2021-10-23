@@ -1,5 +1,7 @@
 package servlets;
 
+import models.Tickets_People_Flights;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,8 +37,18 @@ public class zzServletTemplate extends HttpServlet {
                 // unique to action and the servlet, for example:
                 // UserPurchaseTickets on tickets will need us to unmarshall a flight ID and a number of
                 // tickets, and save that number of tickets in the DB using hibernate.
-//        "numberOfTickets": nots.value,
-//        "userFlightID": ufid.value,
+                // TODO: unmarshall
+                // JSONSplitter.jsonSplitter(jsonText);
+                // TODO: setup objects, add data from unmarshalled JSON
+                // TODO: instantiate new object of type ________
+                // TODO: use setters to set field of ^
+                // TODO: if (we need data from hibernate)... DO IT
+
+                Tickets_People_Flights addtpf = new Tickets_People_Flights(); // JSON{flight_id}, ticket_id,user_id
+                addtpf.setFlight();
+
+                // TODO: call hibernate methods on objects
+                // TODO: write response logic.. such as "Ticket's purchased: 5, for Chicago to LA"
                 break;
             case "UserCancelTicket":
                 //TODO: write logic to delete a ticket here

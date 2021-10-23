@@ -1,3 +1,5 @@
+package utils;
+
 public class JSONSplitter {
     public static String[] jsonSplitter(String json) {
 
