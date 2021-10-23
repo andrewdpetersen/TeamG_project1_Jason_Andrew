@@ -44,16 +44,15 @@ public class ServletPeople extends HttpServlet {
                 People dcustomer = PeopleService.getPersonById(Integer.parseInt(dcflight[1]));
                 Flights dflight = FlightService.getFlightById(Integer.parseInt()); //TODO: modify JavaScript to send
 
-                // TODO: delete using dcustomer and dflight
-                TicketService.cancelTicketByCustomerFlight(dcustomer,dflight); //TODO write method in Services/TicketService.js
+                TicketService.cancelTicketByCustomerFlight(dcustomer,dflight);
 
                 // TODO: write response logic.. such as "Ticket's purchased: 5, for Chicago to LA"
                 break;
             case "Login":
 
-                String[] loginfo =JSONSplitter.jsonSplitter(jsonText); //TODO write objects People, Flights, Tickets to get info from this line.
+                String[] loginfo =JSONSplitter.jsonSplitter(jsonText);
 
-                People lcustomer = PeopleService.getPersonByUsername(loginfo[1]); //TODO write method in Services/PeopleService
+                People lcustomer = PeopleService.getPersonByUsername(loginfo[1]);
                 lcustomer.getAccess_level(); // TODO: send this back in JSON
 
                 // TODO: write response logic.. such as "Welcome Mr. Park".. send to portal based on accessLevel
