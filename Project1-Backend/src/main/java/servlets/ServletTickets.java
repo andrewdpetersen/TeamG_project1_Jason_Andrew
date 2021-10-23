@@ -44,36 +44,38 @@ public class ServletTickets extends HttpServlet {
                 addtpf.setFlight(FlightService.getFlightById(Integer.parseInt(uptickets[3]))); // sets flight
                 addtpf.setPerson(PeopleService.getPersonById(3)); //not getting from JSON..
 
-                // TODO: add a user_id to JSON OR use local user_id
-
                 TicketService.buyNewTicket(addtpf);
 
-//        "numberOfTickets": nots.value,
-//        "userFlightID": ufid.value,
+                String msgPurchasedTicket = "Purchased ticket number: " + addtpf.getTicket_id();
+                if(dbg){System.out.println(msgPurchasedTicket);}
+                resp.getWriter().println(msgPurchasedTicket);
+                resp.setStatus(200);
                 break;
+
             case "UserCancelTicket":
 
                 String[] ucticket = JSONSplitter.jsonSplitter(jsonText);
 
-                Tickets_People_Flights cticket = TicketService.getTicketByID(Integer.parseInt(ucticket[2])); // TODO: write getTicketByID
+                Tickets_People_Flights cticket = TicketService.getTicketByID(Integer.parseInt(ucticket[1])); // TODO: write getTicketByID
                 TicketService.cancelTicket(cticket);
-//                Tickets_People_Flights addtpf = new Tickets_People_Flights(); // JSON{flight_id}, ticket_id,user_id
-//                addtpf.setFlight();
 
-                // TODO: write response logic.. such as "Ticket's purchased: 5, for Chicago to LA"
-                break;
+                String msgCancelledTicket = "Ticket number " + ucticket[1] + " cancelled. Thank you for using AirPortal.";
+                if(dbg){System.out.println(msgCancelledTicket);}
+                resp.getWriter().println(msgCancelledTicket);
+                resp.setStatus(200);
+
+            break;
             case "UserCheckin":
-
                 String[] ucheckin = JSONSplitter.jsonSplitter(jsonText);
 
-                Tickets_People_Flights ccheck = TicketService.getTicketByID(Integer.parseInt(ucheckin[2]));
+                Tickets_People_Flights ccheck = TicketService.getTicketByID(Integer.parseInt(ucheckin[1]));
                 TicketService.checkinTicket(ccheck);
-//                Tickets_People_Flights addtpf = new Tickets_People_Flights(); // JSON{flight_id}, ticket_id,user_id
-//                addtpf.setFlight();
 
-                // TODO: write response logic.. such as "Ticket's purchased: 5, for Chicago to LA"
+                String msgUserCheckedIn = "Ticket number " + ucheckin[1] + " has been checked in. Please proceed to the waiting area near gate G.";
+                if(dbg){System.out.println(msgUserCheckedIn);}
+                resp.getWriter().println(msgUserCheckedIn);
+                resp.setStatus(200);
                 break;
-//        "checkinTicketID": ctid.value,
         }
 
     }
