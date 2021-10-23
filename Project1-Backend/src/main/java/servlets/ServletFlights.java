@@ -50,7 +50,6 @@ public class ServletFlights extends HttpServlet {
                 newflight.setTime(asflight[7]);//asflight[7] = flight_time.value
                 FlightService.saveNewFlight(newflight);
 
-                // TODO: write response logic.. such as "Ticket's purchased: 5, for Chicago to LA"
                 resp.getWriter().println("The flight from: "+asflight[1]+" to: "+asflight[3]+" has been scheduled");
                 resp.setStatus(200);
                 break;
@@ -62,7 +61,8 @@ public class ServletFlights extends HttpServlet {
                 Flights acf = FlightService.getFlightById(Integer.parseInt(acflight[1]));
                 FlightService.deleteFlight(acf);
 
-                // TODO: write response logic.. such as "Ticket's purchased: 5, for Chicago to LA"
+                resp.getWriter().println("Flight id: "+acflight[1]+" has been cancelled");
+                resp.setStatus(200);
                 break;
 
             case "PilotTakeoffLock":
@@ -72,7 +72,8 @@ public class ServletFlights extends HttpServlet {
                 Flights ptl = FlightService.getFlightById(Integer.parseInt(ptlock[1]));
                 FlightService.PilotTakeoffLock(ptl);
 
-                // TODO: write response logic.. such as "Ticket's purchased: 5, for Chicago to LA"
+                resp.getWriter().println("Flight id: "+ptlock[1]+" is locked and ready for takeoff");
+                resp.setStatus(200);
                 break;
         }
 

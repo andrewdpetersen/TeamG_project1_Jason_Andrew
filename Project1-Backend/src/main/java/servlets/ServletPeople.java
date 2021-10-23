@@ -19,7 +19,7 @@ import java.util.Scanner;
 public class ServletPeople extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
+        boolean dbg=true;
         /**
          * Servlet template
          */
@@ -46,7 +46,10 @@ public class ServletPeople extends HttpServlet {
 
                 TicketService.cancelTicketByCustomerFlight(dcustomer,dflight);
 
-                // TODO: write response logic.. such as "Ticket's purchased: 5, for Chicago to LA"
+                String msgTicketCancelled= "Flight ticket canceled for customer " + dcustomer + " on flight " + dflight + ".";
+                if(dbg){System.out.println(msgTicketCancelled);}  // debug send to console
+                resp.getWriter().println(msgTicketCancelled); // send to webpage
+                resp.setStatus(200);
                 break;
             case "Login":
 
