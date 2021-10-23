@@ -1,13 +1,17 @@
 const form = document.getElementById("delete_customer");
 form.addEventListener("submit",function(event) {
     event.preventDefault();//prevents the default "submit" event
-    const customerID = form.querySelector("#customer_id");
     SubmitForm();
 });
 
 async function SubmitForm() {
+    const customerID = form.querySelector("#customer_id");
+    var queryString = decodeURIComponent(window.location.search);
+    const fid = queryString.get("flightID");
     let object = {//creates an object in JSON format
-        "customerID": customerID.value,//key is the variable we are assigning the value to
+        "customerID": customerID.value,
+        "flightID": fid.value
+        //key is the variable we are assigning the value to
     }
     let response = await fetch("http://localhost:8080/Project1-Backend/people", {
         method: "POST",

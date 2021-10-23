@@ -42,8 +42,7 @@ public class ServletPeople extends HttpServlet {
 
                 String[] dcflight =JSONSplitter.jsonSplitter(jsonText);
                 People dcustomer = PeopleService.getPersonById(Integer.parseInt(dcflight[1]));
-                //TODO: modify JavaScript in Admin/adminManifestCancelUser
-                Flights dflight = FlightService.getFlightById(Integer.parseInt());
+                Flights dflight = FlightService.getFlightById(Integer.parseInt(dcflight[3]));
 
                 TicketService.cancelTicketByCustomerFlight(dcustomer,dflight);
 
