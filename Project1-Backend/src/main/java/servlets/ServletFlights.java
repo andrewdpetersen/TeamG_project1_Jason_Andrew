@@ -1,5 +1,6 @@
 package servlets;
 
+import models.Flights;
 import models.Tickets_People_Flights;
 import services.FlightService;
 import services.PeopleService;
@@ -36,37 +37,58 @@ public class ServletFlights extends HttpServlet {
         System.out.println("DEBUG- action: "+action);
 
         switch(action){
-            case "UserPurchaseTickets":
-                //TODO: Write logic to add ticket(s) to DB here-
-                // unique to action and the servlet, for example:
-                // UserPurchaseTickets on tickets will need us to unmarshall a flight ID and a number of
-                // tickets, and save that number of tickets in the DB using hibernate.
-                // TODO: unmarshall
-                // JSONSplitter.jsonSplitter(jsonText);
-                // TODO: setup objects, add data from unmarshalled JSON
-                // TODO: instantiate new object of type ________
-                // TODO: use setters to set field of ^
-                // TODO: if (we need data from hibernate)... DO IT
+            case "AdminScheduleFlight":
 
-//                Tickets_People_Flights addtpf = new Tickets_People_Flights(); // JSON{flight_id}, ticket_id,user_id
-//                addtpf.setFlight();
+                String[] asflight = JSONSplitter.jsonSplitter(jsonText);
 
-                // TODO: call hibernate methods on objects
+                Flights newflight = new Flights();
+                newflight.setDeparture_city(asflight[1]);
+                newflight.setArrival_city(asflight[3]);
+                newflight.setDate(asflight[5]);
+                newflight.setTime(asflight[7]);
+                FlightService.saveNewFlight(newflight);
+
                 // TODO: write response logic.. such as "Ticket's purchased: 5, for Chicago to LA"
                 break;
-            case "UserCancelTicket":
-                //TODO: write logic to delete a ticket here
-//        "userCancelTickeID": ucts.value
+            case "AdminCancelFlight":
+
+                String[] acflight = JSONSplitter.jsonSplitter(jsonText);
+
+
+                Flights acf = FlightService.getFlightById(Integer.parseInt(acflight[1]));
+                FlightService.deleteFlight(acf);
+
+                // TODO: write response logic.. such as "Ticket's purchased: 5, for Chicago to LA"
                 break;
-            case "UserCheckin":
-                //TODO: write logic to checkIn here
-//        "checkinTicketID": ctid.value,
+
+            case "PilotTakeoffLock":
+
+                String[] ptlock = JSONSplitter.jsonSplitter(jsonText);
+
+                Flights ptl = FlightService.getFlightById(Integer.parseInt(ptlock[1]));
+                FlightService.PilotTakeoffLock(ptl); // TODO create method in Services/FlightService
+
+                // TODO: write response logic.. such as "Ticket's purchased: 5, for Chicago to LA"
+                break;
         }
 
     }
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        // TODO 2 ACTIONS... AdminFlightManifest, UserViewFlights... no body
+        String sa = req.getHeader("Servlet-action");
+        switch(sa){
+            case "AdminFlightManifest":
+                // need flight_id
+                FlightService.getFlightById(flight_id); //TODO: send flight_id through header... in AdminPortal/AdminPortalFlightManifest
+                
+                break;
+            case "UserViewFlights":
+                // need departure_city and arrival_city
+
+                break;
+        }
     }
 
 }
