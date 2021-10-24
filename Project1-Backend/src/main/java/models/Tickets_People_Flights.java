@@ -18,12 +18,10 @@ public class Tickets_People_Flights {
     @Column
     private Boolean checked_in;
 
-    @Column
     @ManyToOne
     @JoinColumn(name = "people_id")
     private People person;
 
-    @Column
     @ManyToOne
     @JoinColumn(name = "flight_id")
     private Flights flight;
