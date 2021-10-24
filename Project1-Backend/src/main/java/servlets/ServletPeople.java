@@ -53,17 +53,19 @@ public class ServletPeople extends HttpServlet {
                 break;
             case "Login":
                 String[] loginfo =JSONSplitter.jsonSplitter(jsonText);
-                System.out.println("DEBUG A");
-                People lcustomer = PeopleService.getPersonByUsername(loginfo[1]);
-                System.out.println("DEBUG B");
-                lcustomer.getAccess_level(); // TODO: send this back in JSON
+                People lcustomer = PeopleService.getPersonByUsername(loginfo[2].substring(1,loginfo[2].length()-1));
+                if(lcustomer == null){
+                    FileLogger.getFileLogger().console().threshold(0).writeLog("User does not exist!",0);
+                }else {
+                    lcustomer.getAccess_level();
+                    System.out.println(lcustomer.getAccess_level());
+                    // TODO: send this back in JSON
 
-                // TODO: write response logic.. such as "Welcome Mr. Park".. send to portal based on accessLevel
-                resp.getWriter().write(lcustomer.getAccess_level());
-                System.out.println("DEBUG D");
-                resp.setStatus(200);
-                System.out.println("DEBUG E");
-
+                    // TODO: write response logic.. such as "Welcome Mr. Park".. send to portal based on accessLevel
+                    resp.setContentType("text/plain");
+                    resp.getWriter().write(lcustomer.getAccess_level());
+                    resp.setStatus(200);
+                }
                 break;
         }
 

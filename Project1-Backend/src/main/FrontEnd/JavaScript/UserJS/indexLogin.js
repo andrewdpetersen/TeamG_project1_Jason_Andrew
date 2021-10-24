@@ -1,7 +1,6 @@
 const form = document.getElementById("login");
 form.addEventListener("submit",function(event) {
     event.preventDefault();//prevents the default "submit" event
-
     SubmitForm();
 });
 
@@ -21,6 +20,20 @@ async function SubmitForm() {
         body: JSON.stringify(object)
         //one to add an object, one to update, one to delete, one to get one object, one to get a list
     });
+
+    var access = response.text().then(function (text){
+        console.log(text);
+    });
+    if(access ==1){
+        window.location.href("UserPortal.html");
+    }else if(access==2){
+        window.location.href("PilotPortal.html");
+    }else if(access==3){
+        window.location.href("AdminPortal.html");
+    }else{
+        alert("Username does not exist!");
+    }
+
 }
 
 // TODO: add response logic if necessary - send to appropriate PORTAL

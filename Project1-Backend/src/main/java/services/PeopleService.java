@@ -53,7 +53,15 @@ public class PeopleService {
         query.select(root).where(builder.equal(root.get("username"),username));
         Query getPerson = session.createQuery(query);
         System.out.println("DEBUG: session creates query");
-        return (People) getPerson.getSingleResult();
+        List<People> userList = getPerson.getResultList();
+
+        if(userList.isEmpty()){
+            return null;
+        }else{
+            People activeUser = new People();
+            activeUser = userList.get(0);
+            return activeUser;
+        }
     }
     /**
      * This method is incomplete, we need to complete the hibernate logic on it.
