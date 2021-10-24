@@ -1,5 +1,6 @@
 package servlets;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Flights;
 import models.People;
 import models.Tickets_People_Flights;
@@ -57,13 +58,14 @@ public class ServletPeople extends HttpServlet {
                 if(lcustomer == null){
                     FileLogger.getFileLogger().console().threshold(0).writeLog("User does not exist!",0);
                 }else {
-                    lcustomer.getAccess_level();
-                    System.out.println(lcustomer.getAccess_level());
+                    int level = lcustomer.getAccess_level();
+                    System.out.println(level);
                     // TODO: send this back in JSON
 
                     // TODO: write response logic.. such as "Welcome Mr. Park".. send to portal based on accessLevel
-                    resp.setContentType("text/plain");
-                    resp.getWriter().write(lcustomer.getAccess_level());
+                    resp.setContentType("application/json");
+                    ObjectMapper mapper = new ObjectMapper();
+                    resp.getWriter().write(mapper.writeValueAsString(lcustomer));
                     resp.setStatus(200);
                 }
                 break;
