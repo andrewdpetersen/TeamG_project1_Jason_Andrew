@@ -2,10 +2,8 @@ package servlets;
 
 import models.Flights;
 import models.People;
-import models.Tickets_People_Flights;
 import services.FlightService;
 import services.PeopleService;
-import services.TicketService;
 import utils.JSONSplitter;
 
 import javax.servlet.http.HttpServlet;
@@ -51,15 +49,15 @@ public class ServletFlights extends HttpServlet {
                 String asflightDate = asflight[6].substring(1,asflight[6].length()-1);
                 String asflightTime = asflight[8].substring(1,asflight[8].length()-1);
 
-                newflight.setDeparture_city(asflight[2]);//asflight[2] = departure_city.value
-                newflight.setArrival_city(asflight[4]);//asflight[4] = arrival_city.value
-                newflight.setDate(asflight[6]);//asflight[6] = flight_date.value
-                newflight.setTime(asflight[8]);//asflight[8] = flight_time.value
+                newflight.setDeparture_city(asflightDepart);//asflight[2] = departure_city.value
+                newflight.setArrival_city(asflightArrive);//asflight[4] = arrival_city.value
+                newflight.setDate(asflightDate);//asflight[6] = flight_date.value
+                newflight.setTime(asflightTime);//asflight[8] = flight_time.value
 
 
                 FlightService.saveNewFlight(newflight);
 
-                resp.getWriter().println("The flight from: "+asflight[2]+" to: "+asflight[4]+" has been scheduled");
+                resp.getWriter().println("The flight from: "+asflightDepart+" to: "+asflightArrive+" has been scheduled");
                 resp.setStatus(200);
                 break;
             case "AdminCancelFlight":
