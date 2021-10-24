@@ -11,9 +11,9 @@ async function SubmitAdminAddFlightForm() {
     const flight_time = adminAddForm.querySelector("#flightTime");
     let newFlight = {//creates an object in JSON format
         "departureCity": departure_city.value,
-        "arrivalCity": arrival_city.value,
-        "flightDate": flight_date.value,
-        "flightTime": flight_time.value
+        "arrivalCity": arrival_city.value
+        //"flightDate": flight_date.value,
+        //"flightTime": flight_time.value
     }
     let response = await fetch("http://localhost:8080/Project1-Backend/flights", {
         method: "POST",

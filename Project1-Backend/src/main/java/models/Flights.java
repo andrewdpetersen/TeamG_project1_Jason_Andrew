@@ -23,14 +23,14 @@ public class Flights {
     @Column
     private String arrival_city;
 
-    @Column
-    private String date;
+//    @Column
+//    private String date;
+//
+//    @Column
+//    private String time;
 
     @Column
-    private String time;
-
-    @Column
-    private Boolean lockedForTakeoff;
+    private Boolean locked_For_Takeoff;
 
     @OneToMany(mappedBy = "ticket_id")
     private List<Tickets_People_Flights> ticketList;
@@ -62,27 +62,27 @@ public class Flights {
         this.arrival_city = arrival_city;
     }
 
-    public String getDate() {
-        return date;
+//    public String getDate() {
+//        return date;
+//    }
+
+//    public void setDate(String date) {
+//        this.date = date;
+//    }
+//
+//    public String getTime() {
+//        return time;
+//    }
+//
+//    public void setTime(String time) {
+//        this.time = time;
+//    }
+
+    public Boolean getLocked_For_Takeoff() {
+        return locked_For_Takeoff;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public Boolean getLockedForTakeoff() {
-        return lockedForTakeoff;
-    }
-
-    public void setLockedForTakeoff(Boolean lockedForTakeoff) {
-        this.lockedForTakeoff = lockedForTakeoff;
+    public void setLocked_For_Takeoff(Boolean lockedForTakeoff) {
+        this.locked_For_Takeoff = lockedForTakeoff;
     }
 }

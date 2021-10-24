@@ -1,7 +1,6 @@
 package services;
 
 import models.Flights;
-import models.People;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -116,7 +115,7 @@ public class FlightService {
         System.out.println("DEBUG: PilotTakeoffLock method called");
         Flights takeoffFlight = session.load(Flights.class, flight.getFlight_id());
         System.out.println("DEBUG: session.load flight successful");
-        takeoffFlight.setLockedForTakeoff(true);
+        takeoffFlight.setLocked_For_Takeoff(true);
         session.save(takeoffFlight);
     }
 

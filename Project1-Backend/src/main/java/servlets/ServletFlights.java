@@ -46,13 +46,14 @@ public class ServletFlights extends HttpServlet {
 
                 String asflightDepart = asflight[2].substring(1,asflight[2].length()-1);
                 String asflightArrive = asflight[4].substring(1,asflight[4].length()-1);
-                String asflightDate = asflight[6].substring(1,asflight[6].length()-1);
-                String asflightTime = asflight[8].substring(1,asflight[8].length()-1);
+                //String asflightDate = asflight[6].substring(1,asflight[6].length()-1);
+                //String asflightTime = asflight[8].substring(1,asflight[8].length()-1);
 
                 newflight.setDeparture_city(asflightDepart);//asflight[2] = departure_city.value
                 newflight.setArrival_city(asflightArrive);//asflight[4] = arrival_city.value
-                newflight.setDate(asflightDate);//asflight[6] = flight_date.value
-                newflight.setTime(asflightTime);//asflight[8] = flight_time.value
+                newflight.setLocked_For_Takeoff(false);
+                //newflight.setDate(asflightDate);//asflight[6] = flight_date.value
+                //newflight.setTime(asflightTime);//asflight[8] = flight_time.value
 
 
                 FlightService.saveNewFlight(newflight);

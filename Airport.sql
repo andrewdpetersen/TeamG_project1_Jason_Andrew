@@ -61,4 +61,4 @@ INSERT INTO tickets_people_flights (people_id, flight_id) VALUES (3,2);
 
 Select * FROM  people ;
 Select * FROM  flights ;
-Select * FROM  tickets_people_flights; 
+Select * FROM  tickets; 
