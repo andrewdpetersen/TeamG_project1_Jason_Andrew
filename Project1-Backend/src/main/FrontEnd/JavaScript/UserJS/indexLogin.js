@@ -25,11 +25,11 @@ async function SubmitForm() {
         let access = json.access_level;
         console.log(access);
             if(access ==1){
-                window.location.href("UserPortal/UserPortal.html");
+                window.location.href="UserPortal/UserPortal.html";
             }else if(access ==2){
-                window.location.href("PilotPortal/PilotPortal.html");
+                window.location.href="PilotPortal/PilotPortal.html";
             }else if(access ==3){
-                window.location.href("AdminPortal/AdminPortal.html");
+                window.location.href="AdminPortal/AdminPortal.html";
             }else{
                 alert("Username does not exist!");
             }

@@ -59,7 +59,6 @@ public class ServletPeople extends HttpServlet {
                     FileLogger.getFileLogger().console().threshold(0).writeLog("User does not exist!",0);
                 }else {
                     int level = lcustomer.getAccess_level();
-                    System.out.println(level);
                     // TODO: send this back in JSON
 
                     // TODO: write response logic.. such as "Welcome Mr. Park".. send to portal based on accessLevel
