@@ -28,7 +28,7 @@ async function SubmitUPBTForm() {
         body: JSON.stringify(object)//makes the json into a string to send
     });
 
-    return response.json().then(function(){
+    return response.text().then(function(){
         alert("Ticket successfully purchased! Please go to the counter to get your confirmation number.")
     });
 }

@@ -1,6 +1,8 @@
 package servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import models.Flights;
+import models.People;
 import models.Tickets_People_Flights;
 import services.FlightService;
 import services.PeopleService;
@@ -49,18 +51,18 @@ public class ServletTickets extends HttpServlet {
 
                 while(numberOfTickets>0) {
                     Tickets_People_Flights addtpf = new Tickets_People_Flights();
-                    addtpf.setFlight(FlightService.getFlightById(Integer.parseInt(uptickets[4].substring(1,uptickets[4].length()-1)))); // sets flight
-                    addtpf.setPerson(PeopleService.getPersonById(Integer.parseInt(userIdAsString))); // sets user
+                    Flights addtpfFlight = FlightService.getFlightById(Integer.parseInt(uptickets[4].substring(1,uptickets[4].length()-1))); // sets flight
+                    People addtpfPerson = PeopleService.getPersonById(Integer.parseInt(userIdAsString)); // sets user
                     addtpf.setChecked_in(false);
+                    addtpf.setFlight(addtpfFlight);
+                    addtpf.setPerson(addtpfPerson);
 
                     TicketService.buyNewTicket(addtpf);
                     numberOfTickets--;
                 }
                 
                 //TODO: write response?
-                //resp.setContentType("application/json");
-                //ObjectMapper mapper = new ObjectMapper();
-
+                resp.setContentType("text/plain");
                 resp.setStatus(200);
                 break;
 
