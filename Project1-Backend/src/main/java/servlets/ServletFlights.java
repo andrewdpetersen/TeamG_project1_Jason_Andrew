@@ -51,7 +51,6 @@ public class ServletFlights extends HttpServlet {
 
                 FlightService.saveNewFlight(newflight);
 
-                resp.getWriter().println("The flight from: "+asflightDepart+" to: "+asflightArrive+" has been scheduled");
                 resp.setStatus(200);
                 break;
             case "AdminCancelFlight":
@@ -65,7 +64,6 @@ public class ServletFlights extends HttpServlet {
 
                 FlightService.deleteFlight(acf);
 
-                resp.getWriter().println("Flight id: "+acflight[2]+" has been cancelled");
                 resp.setStatus(200);
                 break;
 
@@ -98,37 +96,34 @@ public class ServletFlights extends HttpServlet {
         switch(sa){
             case "AdminFlightManifest":
                 // need flight_id
-                FlightService.getFlightById(Integer.parseInt(req.getHeader("flightID")));
-                List<People> passengerManifest = PeopleService.getPassengersByFlight(Integer.parseInt(req.getHeader("flightID"))); // might need to change this method... using flights Object
+                Flights flight =FlightService.getFlightById(Integer.parseInt(req.getHeader("flightID").substring(1, req.getHeader("flightID").length()-1)));
+                List<People> passengerManifest = PeopleService.getPassengersByFlight(flight.getFlight_id()); // might need to change this method... using flights Object
 
+                System.out.println("DEBUG: Manifest Created");
                 String manifestJSON = "{";
                 for (People passenger:passengerManifest) {
-                    manifestJSON = manifestJSON+"people_id:"+passenger.getPeople_id()+","+
-                            "username:"+passenger.getUsername()+",\n";
+                    int pid =passenger.getPeople_id();
+                    String username = passenger.getUsername();
+                    manifestJSON=manifestJSON+"ID: "+pid+"  Username: "+username+",\n";
                 }
                 manifestJSON= manifestJSON+"}";
                 // TODO send manifestJSON using JavaScript to AdminViewManifest
                 // TODO: google how to send JSON back to html page
+                System.out.println("DEBUG: Manifest JSON= "+manifestJSON);
                 resp.getWriter().write(manifestJSON);
+                resp.setStatus(200);
 
                 break;
             case "UserViewFlights":
                 // need departure_city and arrival_city
                 List<Flights> flightSchedule = FlightService.getFlightsByArrivalDestination(req.getHeader("selectDepartureCity"), req.getHeader("selectArrivalCity"));
                 String flightScheduleJSON = "{";
-                for (Flights flight:flightSchedule) {
-                    resp.getWriter().println("Flight ID: "+flight.getFlight_id()+" from: "+
-                            flight.getDeparture_city()+" to: "+flight.getArrival_city());
-//                    flightScheduleJSON = flightScheduleJSON+"{flight_id:"+flight.getFlight_id()+","+
-//                            "departure_city:"+flight.getDeparture_city()+","+
-//                            "arrival_city:"+flight.getArrival_city()+"},";
+                for (Flights viewflight:flightSchedule) {
+                    resp.getWriter().println("Flight ID: "+viewflight.getFlight_id()+" from: "+
+                            viewflight.getDeparture_city()+" to: "+viewflight.getArrival_city());
                 }
                 resp.setStatus(200);
-//                flightScheduleJSON = flightScheduleJSON+"}";
                 //TODO: send flightScheduleJSON using JS to
-                // TODO: google how to send JSON back to html page
-                //TODO: maybe just send as plaintext string?
-
 
                 break;
         }

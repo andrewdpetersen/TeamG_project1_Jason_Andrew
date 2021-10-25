@@ -27,6 +27,10 @@ async function SubmitUPBTForm() {
         //one to add an object, one to update, one to delete, one to get one object, one to get a list
         body: JSON.stringify(object)//makes the json into a string to send
     });
+
+    return response.json().then(function(){
+        alert("Ticket successfully purchased! Please go to the counter to get your confirmation number.")
+    });
 }
 
 // TODO: add response logic if necessary - confirmation number... or "You've purchased xx tickets for flight y from Chicago to Miami

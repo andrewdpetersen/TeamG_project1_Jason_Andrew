@@ -24,7 +24,7 @@ public class People {
     @Column
     private String password;
 
-    @OneToMany(mappedBy = "ticket_id")//,cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "ticket_id",cascade = CascadeType.REMOVE)
     private List<Tickets_People_Flights> ticketList;
 
     //constructor

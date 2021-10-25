@@ -1,5 +1,6 @@
 package servlets;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Tickets_People_Flights;
 import services.FlightService;
 import services.PeopleService;
@@ -55,8 +56,11 @@ public class ServletTickets extends HttpServlet {
                     TicketService.buyNewTicket(addtpf);
                     numberOfTickets--;
                 }
-
+                
                 //TODO: write response?
+                //resp.setContentType("application/json");
+                //ObjectMapper mapper = new ObjectMapper();
+
                 resp.setStatus(200);
                 break;
 
