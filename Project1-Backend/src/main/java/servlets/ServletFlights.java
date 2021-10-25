@@ -19,7 +19,7 @@ public class ServletFlights extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         boolean dbg =true;
-        
+
         System.out.println("DEBUG- ServletFlights REACHED");//take this out after debug finished
 
         //These lines read the request body and put it into a string called jsonText

@@ -101,7 +101,9 @@ public class FlightService {
      */
     //This doesn't need a unit test.
     public static void deleteFlight(Flights flight){
+        session.beginTransaction();
         session.delete(flight);
+        session.getTransaction().commit();
     }
 
 
