@@ -18,6 +18,10 @@ async function SubmitUPCIForm() {
         //one to add an object, one to update, one to delete, one to get one object, one to get a list
         body: JSON.stringify(object)//makes the json into a string to send
     });
+
+    return response.text().then(function(){
+        alert(`Ticket checked in! Please proceed to gate G to board your flight.`)
+    })
 }
 
 // TODO: add response logic if necessary - return CHECKED IN for Flight bbbbxxxxx

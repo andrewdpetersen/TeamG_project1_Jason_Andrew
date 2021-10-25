@@ -83,12 +83,12 @@ public class ServletTickets extends HttpServlet {
             case "UserCheckin":
                 String[] ucheckin = JSONSplitter.jsonSplitter(jsonText);
 
-                Tickets_People_Flights ccheck = TicketService.getTicketByID(Integer.parseInt(ucheckin[1]));
+                Tickets_People_Flights ccheck = TicketService.getTicketByID(Integer.parseInt(ucheckin[2].substring(1,ucheckin[2].length()-1)));
                 TicketService.checkinTicket(ccheck);
 
-                String msgUserCheckedIn = "Ticket number " + ucheckin[1] + " has been checked in. Please proceed to the waiting area near gate G.";
+                String msgUserCheckedIn = "Ticket number " + ucheckin[2].substring(1,ucheckin[2].length()-1) + " has been checked in. Please proceed to the waiting area near gate G.";
                 if(dbg){System.out.println(msgUserCheckedIn);}
-                resp.getWriter().println(msgUserCheckedIn);
+                resp.setContentType("text/plain");
                 resp.setStatus(200);
                 break;
         }
