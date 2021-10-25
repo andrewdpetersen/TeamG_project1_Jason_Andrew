@@ -32,7 +32,7 @@ public class Flights {
     @Column
     private Boolean locked_For_Takeoff;
 
-    @OneToMany(mappedBy = "ticket_id")
+    @OneToMany(mappedBy = "ticket_id")//,cascade = CascadeType.REMOVE)
     private List<Tickets_People_Flights> ticketList;
 
     public Flights() {

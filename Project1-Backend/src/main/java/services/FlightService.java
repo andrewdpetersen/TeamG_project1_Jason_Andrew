@@ -15,11 +15,6 @@ public class FlightService {
     private static Session session = HibernateManagement.getSession();
     private static SessionFactory sessionFactory = HibernateManagement.getSessionFactory();
 
-    /**
-     * It is unclear if this initialization method is necessary now that we are
-     * using hibernate rather than a direct repo.
-     */
-    public static void init(){}
 
     /**
      * This method save a Flights instance to our database.
