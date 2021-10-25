@@ -2,6 +2,7 @@ let userportalcheckinform = document.getElementById("user_checkin");
 userportalcheckinform.addEventListener("submit",function(event) {
     event.preventDefault();//prevents the default "submit" event
     SubmitUPCIForm();
+    userportalcheckinform.reset();
 });
 
 async function SubmitUPCIForm() {

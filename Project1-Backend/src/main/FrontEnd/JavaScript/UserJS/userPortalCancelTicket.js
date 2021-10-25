@@ -2,6 +2,7 @@ let userportalcancelform = document.getElementById("user_cancel_tickets");
 userportalcancelform.addEventListener("submit",function(event) {
     event.preventDefault();//prevents the default "submit" event
     SubmitUPCTForm();
+    userportalcancelform.reset();
 });
 
 async function SubmitUPCTForm() {

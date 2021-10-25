@@ -5,6 +5,7 @@ userportalbuyticketsform.addEventListener("submit",function(event) {
     event.preventDefault();//prevents the default "submit" event
     if(dbg){console.log("DEBUG- EventListener Added");}
     SubmitUPBTForm();
+    userportalbuyticketsform.reset();
 });
 
 async function SubmitUPBTForm() {

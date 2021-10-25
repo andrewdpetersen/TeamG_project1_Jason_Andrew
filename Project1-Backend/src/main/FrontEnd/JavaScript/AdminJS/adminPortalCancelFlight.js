@@ -2,6 +2,7 @@ const adminCancelForm = document.getElementById("cancel_flight");
 adminCancelForm.addEventListener("submit",function(event) {
     event.preventDefault();//prevents the default "submit" event
     SubmitAdminCancelForm();
+    adminCancelForm.reset();
 });
 
 async function SubmitAdminCancelForm() {

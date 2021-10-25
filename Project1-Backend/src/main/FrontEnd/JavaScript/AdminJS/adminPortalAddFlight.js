@@ -2,6 +2,7 @@ const adminAddForm = document.getElementById("add_flight");
 adminAddForm.addEventListener("submit",function(event) {
     event.preventDefault();//prevents the default "submit" event
     SubmitAdminAddFlightForm();
+    adminAddForm.reset();
 });
 
 async function SubmitAdminAddFlightForm() {
