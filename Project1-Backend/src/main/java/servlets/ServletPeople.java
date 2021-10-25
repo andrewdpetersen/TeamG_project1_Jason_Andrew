@@ -21,9 +21,9 @@ import java.util.Scanner;
 public class ServletPeople extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        boolean dbg=true;
+        boolean dbg = true;
         System.out.println("DEBUG- PeopleServlet REACHED");//take this out after debug finished
-        FileLogger.getFileLogger().writeLog("DEBUG- PeopleServlet REACHED",0);
+        FileLogger.getFileLogger().writeLog("DEBUG- PeopleServlet REACHED", 0);
 
         //These lines read the request body and put it into a string called jsonText
         InputStream requestBody = req.getInputStream(); // from java.util
@@ -31,37 +31,41 @@ public class ServletPeople extends HttpServlet {
         String jsonText = sc.useDelimiter("\\A").next();
         //This will be a set of key-value pairs, like "numberOfTickets": 3, "userFlightID":4, "userCancelTickeID": 4
 
-        FileLogger.getFileLogger().writeLog("DEBUG PeopleServletJSON- JSON Text: " + jsonText,0);
+        FileLogger.getFileLogger().writeLog("DEBUG PeopleServletJSON- JSON Text: " + jsonText, 0);
 
         //get the action from the request header
         String action = req.getHeader("Servlet-action");
-        if(dbg){System.out.println("DEBUG- action: "+action);}
-        FileLogger.getFileLogger().writeLog("DEBUG- action: "+action,0);
+        if (dbg) {
+            System.out.println("DEBUG- action: " + action);
+        }
+        FileLogger.getFileLogger().writeLog("DEBUG- action: " + action, 0);
 
-        switch(action){
+        switch (action) {
             case "DeleteCustomerFlight":
 
-                String[] dcflight =JSONSplitter.jsonSplitter(jsonText);
-                People dcustomer = PeopleService.getPersonById(Integer.parseInt(dcflight[1]));
-                Flights dflight = FlightService.getFlightById(Integer.parseInt(dcflight[3]));
+                String[] dcflight = JSONSplitter.jsonSplitter(jsonText);
+                People dcustomer = PeopleService.getPersonById(Integer.parseInt(dcflight[2].substring(1, dcflight[2].length() - 1)));
+                Flights dflight = FlightService.getFlightById(Integer.parseInt(dcflight[4].substring(1, dcflight[4].length() - 1)));
 
-                TicketService.cancelTicketByCustomerFlight(dcustomer,dflight);
+                TicketService.cancelTicketByCustomerFlight(dcustomer, dflight);
 
-                String msgTicketCancelled= "Flight ticket canceled for customer " + dcustomer + " on flight " + dflight + ".";
-                if(dbg){System.out.println(msgTicketCancelled);}  // debug send to console
+                String msgTicketCancelled = "Flight ticket canceled for customer " + dcustomer + " on flight " + dflight + ".";
+                if (dbg) {
+                    System.out.println(msgTicketCancelled);
+                }// debug send to console
+
+                //TODO: write response
                 resp.getWriter().println(msgTicketCancelled); // send to webpage
                 resp.setStatus(200);
                 break;
             case "Login":
-                String[] loginfo =JSONSplitter.jsonSplitter(jsonText);
-                People lcustomer = PeopleService.getPersonByUsername(loginfo[2].substring(1,loginfo[2].length()-1));
-                if(lcustomer == null){
-                    FileLogger.getFileLogger().console().threshold(0).writeLog("User does not exist!",0);
-                }else {
+                String[] loginfo = JSONSplitter.jsonSplitter(jsonText);
+                People lcustomer = PeopleService.getPersonByUsername(loginfo[2].substring(1, loginfo[2].length() - 1));
+                if (lcustomer == null) {
+                    FileLogger.getFileLogger().console().threshold(0).writeLog("User does not exist!", 0);
+                } else {
                     int level = lcustomer.getAccess_level();
-                    // TODO: send this back in JSON
 
-                    // TODO: write response logic.. such as "Welcome Mr. Park".. send to portal based on accessLevel
                     resp.setContentType("application/json");
                     ObjectMapper mapper = new ObjectMapper();
                     resp.getWriter().write(mapper.writeValueAsString(lcustomer));
@@ -69,11 +73,9 @@ public class ServletPeople extends HttpServlet {
                 }
                 break;
         }
-
     }
-
     @Override
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) {
     }
 
 }

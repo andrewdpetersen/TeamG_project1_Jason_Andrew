@@ -10,14 +10,19 @@ userportalbuyticketsform.addEventListener("submit",function(event) {
 async function SubmitUPBTForm() {
     const nots = userportalbuyticketsform.querySelector("#numberOfTickets");
     const ufid = userportalbuyticketsform.querySelector("#userFlightID");
+    const queryString = window.location.search;
+    const user_ID = new URLSearchParams(queryString).get("userID");
+    console.log(user_ID);
     let object = {//creates an object in JSON format
         "numberOfTickets": nots.value,//key is the variable we are assigning the value to
         "userFlightID": ufid.value,//the value comes from form input
     }
     let response = await fetch("http://localhost:8080/Project1-Backend/tickets", {
         method: "POST",
-        headers: {"Content-Type": "application/json",
-        "Servlet-action" : "UserPurchaseTickets"
+        headers: {
+            "Content-Type": "application/json",
+            "Servlet-action": "UserPurchaseTickets",
+            "user_id":user_ID
         },
         //one to add an object, one to update, one to delete, one to get one object, one to get a list
         body: JSON.stringify(object)//makes the json into a string to send

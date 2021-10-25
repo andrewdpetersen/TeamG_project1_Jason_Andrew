@@ -23,9 +23,10 @@ async function SubmitForm() {
 
     return response.json().then(function(json){
         let access = json.access_level;
+        let userID = json.people_id;
         console.log(access);
             if(access ==1){
-                window.location.href="UserPortal/UserPortal.html";
+                window.location.href="UserPortal/UserPortal.html?userID="+`${userID}`;
             }else if(access ==2){
                 window.location.href="PilotPortal/PilotPortal.html";
             }else if(access ==3){
@@ -35,9 +36,3 @@ async function SubmitForm() {
             }
     });
 }
-
-// TODO: add response logic if necessary - send to appropriate PORTAL
-//The only times we need a response: user-Flights, admin-Manifest, admin-Flights
-
-//let json = response.json();
-//And the response logic goes here

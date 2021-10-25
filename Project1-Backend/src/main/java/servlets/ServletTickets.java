@@ -35,20 +35,28 @@ public class ServletTickets extends HttpServlet {
         String action = req.getHeader("Servlet-action");
         if(dbg){System.out.println("DEBUG- action: "+action);}
 
+        String userIdAsString = req.getHeader("user_ID");
+        System.out.println(userIdAsString);
+
         switch(action){
             case "UserPurchaseTickets":
 
                 String[] uptickets = JSONSplitter.jsonSplitter(jsonText);
+                System.out.println("DEBUG: " +uptickets.length);
 
-                Tickets_People_Flights addtpf = new Tickets_People_Flights(); // JSON{flight_id}, ticket_id,user_id
-                addtpf.setFlight(FlightService.getFlightById(Integer.parseInt(uptickets[3]))); // sets flight
-                addtpf.setPerson(PeopleService.getPersonById(3)); //not getting from JSON..
+                int numberOfTickets = Integer.parseInt(uptickets[2].substring(1,uptickets[2].length()-1));
 
-                TicketService.buyNewTicket(addtpf);
+                while(numberOfTickets>0) {
+                    Tickets_People_Flights addtpf = new Tickets_People_Flights();
+                    addtpf.setFlight(FlightService.getFlightById(Integer.parseInt(uptickets[4].substring(1,uptickets[4].length()-1)))); // sets flight
+                    addtpf.setPerson(PeopleService.getPersonById(Integer.parseInt(userIdAsString))); // sets user
+                    addtpf.setChecked_in(false);
 
-                String msgPurchasedTicket = "Purchased ticket number: " + addtpf.getTicket_id();
-                if(dbg){System.out.println(msgPurchasedTicket);}
-                resp.getWriter().println(msgPurchasedTicket);
+                    TicketService.buyNewTicket(addtpf);
+                    numberOfTickets--;
+                }
+
+                //TODO: write response?
                 resp.setStatus(200);
                 break;
 
