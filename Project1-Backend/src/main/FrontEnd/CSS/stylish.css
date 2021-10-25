@@ -8,7 +8,7 @@
    color:green; /* text color */
 }
 .admin{ /* sets the class="admin" to have this style */
-    background-color:lightred;
+    background-color:red;
 }
 #test{ /* sets the id="test" to have this style */
     color:red;
