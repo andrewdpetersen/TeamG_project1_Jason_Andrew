@@ -25,7 +25,11 @@ public class TicketService {
 
 
     //User - CANCEL a ticket // Admin will also use
-    public static void cancelTicket (Tickets_People_Flights tpf){session.delete(tpf);} // Use the session to delete the Object tpf from database
+    public static void cancelTicket (Tickets_People_Flights tpf){
+        session.beginTransaction();
+        session.delete(tpf);// Use the session to delete the Object tpf from database
+        session.getTransaction().commit();
+    } 
 
     public static void cancelTicketByCustomerFlight(People customer, Flights flight){
         CriteriaBuilder builder = session.getCriteriaBuilder();

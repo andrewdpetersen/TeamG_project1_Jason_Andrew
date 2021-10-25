@@ -18,10 +18,8 @@ async function SubmitUPCTForm() {
         //one to add an object, one to update, one to delete, one to get one object, one to get a list
         body: JSON.stringify(object)//makes the json into a string to send
     });
+
+    return response.text().then(function(){
+        alert(`Ticket cancelled. Thank you for using AirPortal.`)
+    });
 }
-
-// TODO: add response logic if necessary - "Tickets canceled, money refunded, have a nice day.... Somewhere else."
-//The only times we need a response: user-Flights, admin-Manifest, admin-Flights
-
-//let json = response.json();
-//And the response logic goes here

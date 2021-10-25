@@ -60,8 +60,7 @@ public class ServletTickets extends HttpServlet {
                     TicketService.buyNewTicket(addtpf);
                     numberOfTickets--;
                 }
-                
-                //TODO: write response?
+
                 resp.setContentType("text/plain");
                 resp.setStatus(200);
                 break;
@@ -70,12 +69,14 @@ public class ServletTickets extends HttpServlet {
 
                 String[] ucticket = JSONSplitter.jsonSplitter(jsonText);
 
-                Tickets_People_Flights cticket = TicketService.getTicketByID(Integer.parseInt(ucticket[1])); // TODO: write getTicketByID
+                System.out.println(ucticket);
+                Integer cticketID = Integer.parseInt(ucticket[2].substring(1,ucticket[2].length()-1));
+                Tickets_People_Flights cticket = TicketService.getTicketByID(cticketID);
                 TicketService.cancelTicket(cticket);
 
-                String msgCancelledTicket = "Ticket number " + ucticket[1] + " cancelled. Thank you for using AirPortal.";
+                String msgCancelledTicket = "Ticket number " + ucticket[2].substring(1,ucticket[2].length()-1) + " cancelled. Thank you for using AirPortal.";
                 if(dbg){System.out.println(msgCancelledTicket);}
-                resp.getWriter().println(msgCancelledTicket);
+                resp.setContentType("text/plain");
                 resp.setStatus(200);
 
             break;

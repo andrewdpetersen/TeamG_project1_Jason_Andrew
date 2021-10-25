@@ -64,8 +64,6 @@ public class ServletPeople extends HttpServlet {
                 if (lcustomer == null) {
                     FileLogger.getFileLogger().console().threshold(0).writeLog("User does not exist!", 0);
                 } else {
-                    int level = lcustomer.getAccess_level();
-
                     resp.setContentType("application/json");
                     ObjectMapper mapper = new ObjectMapper();
                     resp.getWriter().write(mapper.writeValueAsString(lcustomer));
