@@ -22,6 +22,10 @@ async function SubmitAdminAddFlightForm() {
         "Servlet-action": "AdminScheduleFlight"},
         body: JSON.stringify(newFlight)//makes the json into a string to send
     });
+
+    return response.text().then(function(){
+        alert(`Flight successfully scheduled!`);
+    })
 }
 
 //The only times we need a response: user-Flights, admin-ViewManifest, admin-ViewFlights

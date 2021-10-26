@@ -57,6 +57,8 @@ public class ServletFlights extends HttpServlet {
 
                     FlightService.saveNewFlight(newflight);
 
+                    resp.setContentType("text/plain");
+                    resp.getWriter().write(newflight.getFlight_id());
                     resp.setStatus(200);
                     break;
                 case "AdminCancelFlight":
