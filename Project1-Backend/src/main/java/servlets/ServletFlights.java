@@ -7,6 +7,7 @@ import models.Tickets_People_Flights;
 import services.FlightService;
 import services.PeopleService;
 import services.TicketService;
+import utils.FileLogger;
 import utils.JSONSplitter;
 
 import javax.servlet.http.HttpServlet;
@@ -20,81 +21,88 @@ import java.util.Scanner;
 
 public class ServletFlights extends HttpServlet {
     @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        boolean dbg =true;
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) {
+        try {
 
-        System.out.println("DEBUG- ServletFlights REACHED");//take this out after debug finished
+            boolean dbg = true;
 
-        //These lines read the request body and put it into a string called jsonText
-        InputStream requestBody = req.getInputStream();
-        Scanner sc = new Scanner(requestBody, StandardCharsets.UTF_8.name());
-        String jsonText = sc.useDelimiter("\\A").next();
-        //This will be a set of key-value pairs, like "numberOfTickets": 3, "userFlightID":4, "userCancelTickeID": 4
+            System.out.println("DEBUG- ServletFlights REACHED");//take this out after debug finished
 
-        System.out.println("DEBUG FlightID- JSON Text: " + jsonText);//take this out after debugging
+            //These lines read the request body and put it into a string called jsonText
+            InputStream requestBody = req.getInputStream();
+            Scanner sc = new Scanner(requestBody, StandardCharsets.UTF_8.name());
+            String jsonText = sc.useDelimiter("\\A").next();
+            //This will be a set of key-value pairs, like "numberOfTickets": 3, "userFlightID":4, "userCancelTickeID": 4
 
-        //get the action from the request header
-        String action = req.getHeader("Servlet-action");
-        System.out.println("DEBUG- action: "+action);
+            System.out.println("DEBUG FlightID- JSON Text: " + jsonText);//take this out after debugging
 
-        switch(action){
-            case "AdminScheduleFlight":
+            //get the action from the request header
+            String action = req.getHeader("Servlet-action");
+            System.out.println("DEBUG- action: " + action);
 
-                //jsonText comes from adminPortalAddFlights.js
-                String[] asflight = JSONSplitter.jsonSplitter(jsonText);
+            switch (action) {
+                case "AdminScheduleFlight":
 
-                Flights newflight = new Flights();
+                    //jsonText comes from adminPortalAddFlights.js
+                    String[] asflight = JSONSplitter.jsonSplitter(jsonText);
 
-                String asflightDepart = asflight[2].substring(1,asflight[2].length()-1);
-                String asflightArrive = asflight[4].substring(1,asflight[4].length()-1);
+                    Flights newflight = new Flights();
 
-                newflight.setDeparture_city(asflightDepart);//asflight[2] = departure_city.value
-                newflight.setArrival_city(asflightArrive);//asflight[4] = arrival_city.value
-                newflight.setLocked_For_Takeoff(false);
+                    String asflightDepart = asflight[2].substring(1, asflight[2].length() - 1);
+                    String asflightArrive = asflight[4].substring(1, asflight[4].length() - 1);
 
-                FlightService.saveNewFlight(newflight);
+                    newflight.setDeparture_city(asflightDepart);//asflight[2] = departure_city.value
+                    newflight.setArrival_city(asflightArrive);//asflight[4] = arrival_city.value
+                    newflight.setLocked_For_Takeoff(false);
 
-                resp.setStatus(200);
-                break;
-            case "AdminCancelFlight":
+                    FlightService.saveNewFlight(newflight);
 
-                System.out.println("DEBUG: AdminCancelFlight reached");
-                String[] acflight = JSONSplitter.jsonSplitter(jsonText);
+                    resp.setStatus(200);
+                    break;
+                case "AdminCancelFlight":
 
-                String acflight2 = acflight[2].substring(1,acflight[2].length()-1);
-                Flights acf = FlightService.getFlightById(Integer.parseInt(acflight2));
-                System.out.println("DEBUG: flight_id parsed");
+                    System.out.println("DEBUG: AdminCancelFlight reached");
+                    String[] acflight = JSONSplitter.jsonSplitter(jsonText);
 
-                FlightService.deleteFlight(acf);
+                    String acflight2 = acflight[2].substring(1, acflight[2].length() - 1);
+                    Flights acf = FlightService.getFlightById(Integer.parseInt(acflight2));
+                    System.out.println("DEBUG: flight_id parsed");
 
-                resp.setStatus(200);
-                break;
+                    FlightService.deleteFlight(acf);
 
-            case "PilotTakeoffLock":
-                System.out.println("DEBUG: PilotTakeoffLock case reached");
-                String[] ptlock = JSONSplitter.jsonSplitter(jsonText);
+                    resp.setStatus(200);
+                    break;
 
-                //Need to keep this!!!!!!!
-                String ptlock2 = ptlock[2].substring(1,ptlock[2].length()-1);
+                case "PilotTakeoffLock":
+                    System.out.println("DEBUG: PilotTakeoffLock case reached");
+                    String[] ptlock = JSONSplitter.jsonSplitter(jsonText);
 
-                Integer flight_id = Integer.valueOf(ptlock2);
-                System.out.println("DEBUG: FlightID parsed");
+                    //Need to keep this!!!!!!!
+                    String ptlock2 = ptlock[2].substring(1, ptlock[2].length() - 1);
 
-                Flights ptl = FlightService.getFlightById(flight_id);
-                if(dbg){
-                    System.out.println("DEBUG: getFlightById success");}
-                FlightService.PilotTakeoffLock(ptl);
+                    Integer flight_id = Integer.valueOf(ptlock2);
+                    System.out.println("DEBUG: FlightID parsed");
 
-                resp.setContentType("text/plain");
-                resp.getWriter().println("Flight id: "+ptlock[1]+" is locked and ready for takeoff");
-                resp.setStatus(200);
-                break;
+                    Flights ptl = FlightService.getFlightById(flight_id);
+                    if (dbg) {
+                        System.out.println("DEBUG: getFlightById success");
+                    }
+                    FlightService.PilotTakeoffLock(ptl);
+
+                    resp.setContentType("text/plain");
+                    resp.getWriter().println("Flight id: " + ptlock[1] + " is locked and ready for takeoff");
+                    resp.setStatus(200);
+                    break;
+            }
+        }catch (IOException e){
+            FileLogger.getFileLogger().console().threshold(4).writeLog("Can't read input stream",4);
         }
-
     }
 
     @Override
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) {
+        try{
+
         String sa = req.getHeader("Servlet-action");
         switch(sa){
             case "AdminFlightManifest":
@@ -120,6 +128,9 @@ public class ServletFlights extends HttpServlet {
                 resp.setStatus(200);
 
                 break;
+        }
+    }catch (IOException e){
+            FileLogger.getFileLogger().console().threshold(4).writeLog("Can't read input stream",4);
         }
     }
 
