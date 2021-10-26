@@ -8,14 +8,29 @@ async function SubmitUPVFForm() {
     const selectDepCity = userportalviewflightsform.querySelector("#select_departureCity");
     const sac = userportalviewflightsform.querySelector("#select_arrivalCity");
 
+    let arrive_City = sac.value;
+    let depart_City = selectDepCity.value;
+
     let response = await fetch("http://localhost:8080/Project1-Backend/flights", {
         method: "GET",//NO BODY on GET requests
-        headers: {"Content-Type": "application/json",
-        "Servlet-action" : "UserViewFlights",
-            "selectDepartureCity": selectDepCity.value,
-            "selectArrivalCity": sac.value//the value comes from form input
+        headers: {
+            "Content-Type": "application/json",
+            "Servlet-action": "UserViewFlights",
+            "selectDepartureCity": depart_City,
+            "selectArrivalCity": arrive_City
         },
     });
+    let jsonFlightSchedule = await response.json();
+
+    let flightSchedule = document.getElementById("userFlightScheduleTable");
+    for (let element of jsonFlightSchedule) {
+        let tr = flightSchedule.insertRow(-1);
+        for (let key in element) {
+            let cell = tr.insertCell(-1);
+            cell.innerHTML = element[key];
+        }
+    }
+    window.location.href = "UserFlights.html"
 }
 
 // TODO: add response logic if necessary - move to UserFlights.html, print all available flights

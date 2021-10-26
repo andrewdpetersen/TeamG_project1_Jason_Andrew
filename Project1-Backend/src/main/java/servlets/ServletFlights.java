@@ -116,13 +116,10 @@ public class ServletFlights extends HttpServlet {
             case "UserViewFlights":
                 // need departure_city and arrival_city
                 List<Flights> flightSchedule = FlightService.getFlightsByArrivalDestination(req.getHeader("selectDepartureCity"), req.getHeader("selectArrivalCity"));
-                String flightScheduleJSON = "{";
-                for (Flights viewflight:flightSchedule) {
-                    resp.getWriter().println("Flight ID: "+viewflight.getFlight_id()+" from: "+
-                            viewflight.getDeparture_city()+" to: "+viewflight.getArrival_city());
-                }
+                resp.setContentType("application/json");
+                ObjectMapper flightMapper = new ObjectMapper();
+                resp.getWriter().write(flightMapper.writeValueAsString(flightSchedule));
                 resp.setStatus(200);
-                //TODO: send flightScheduleJSON using JS to
 
                 break;
         }
