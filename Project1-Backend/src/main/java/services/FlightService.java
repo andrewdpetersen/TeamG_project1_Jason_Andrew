@@ -38,45 +38,6 @@ public class FlightService {
         return session.get(Flights.class, flight_id);
     }
 
-    /**
-     * This method returns a list of all the flights in our database.
-     * @return List<Flights>
-     */
-    public static List<Flights> getAllFlights(){
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Flights> query = builder.createQuery(Flights.class);
-        Root<Flights> root = query.from(Flights.class);
-        query.select(root);
-        return session.createQuery(query).getResultList();
-    }
-
-    /**
-     * This method returns a list of all the flights with a given departure city.
-     * @param departureCity - String, the city all flights in the list are departing from
-     * @return List<Flights>
-     */
-    public static List<Flights> getFlightsByDepartureCity(String departureCity){
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Flights> query = builder.createQuery(Flights.class);
-        Root<Flights> root = query.from(Flights.class);
-        query.select(root).where(builder.equal(root.get("departure_city"),departureCity));
-        Query newQuery = session.createQuery(query);
-        return newQuery.getResultList();
-    }
-
-    /**
-     * This method returns a list of all the flights with a given arrival city.
-     * @param arrivalCity - String, the city all flights in the list are arriving at
-     * @return List<Flights>
-     */
-    public static List<Flights> getFlightsByArrivalCity(String arrivalCity){
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Flights> query = builder.createQuery(Flights.class);
-        Root<Flights> root = query.from(Flights.class);
-        query.select(root).where(builder.equal(root.get("arrival_city"),arrivalCity));
-        Query newQuery = session.createQuery(query);
-        return newQuery.getResultList();
-    }
 
     /**
      * This method is incomplete... we need to adjust it to limit our search by cities.

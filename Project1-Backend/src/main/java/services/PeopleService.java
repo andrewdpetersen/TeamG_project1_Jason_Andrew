@@ -1,6 +1,8 @@
 package services;
 
+import models.Flights;
 import models.People;
+import models.Tickets_People_Flights;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -62,15 +64,6 @@ public class PeopleService {
             activeUser = userList.get(0);
             return activeUser;
         }
-    }
-    /**
-     * This method is incomplete, we need to complete the hibernate logic on it.
-     * @param flight_id
-     * @return
-     */
-    public static List<People> getPassengersByFlight(int flight_id){
-        List<People> manifest = new LinkedList<>();
-        return manifest;
     }
 
     public static Session getSession() {

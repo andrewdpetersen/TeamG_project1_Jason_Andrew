@@ -53,6 +53,15 @@ public class TicketService {
         return (Tickets_People_Flights) getTicket.getSingleResult();
     }
 
+    public static List<Tickets_People_Flights> getTicketsByFlight(Flights flight){
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Tickets_People_Flights> query = builder.createQuery(Tickets_People_Flights.class);
+        Root<Tickets_People_Flights> root = query.from(Tickets_People_Flights.class);
+        query.select(root).where(builder.equal(root.get("flight"),flight));
+        Query getTicketManifest = session.createQuery(query);
+        return (List<Tickets_People_Flights>) getTicketManifest.getResultList();
+    }
+
     public static void checkinTicket(Tickets_People_Flights ticket){
         //Ticket is in ticket reference, just need to change field to "checked in"
         session.beginTransaction();

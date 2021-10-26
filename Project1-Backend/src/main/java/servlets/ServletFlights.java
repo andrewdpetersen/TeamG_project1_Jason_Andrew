@@ -1,9 +1,12 @@
 package servlets;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Flights;
 import models.People;
+import models.Tickets_People_Flights;
 import services.FlightService;
 import services.PeopleService;
+import services.TicketService;
 import utils.JSONSplitter;
 
 import javax.servlet.http.HttpServlet;
@@ -96,21 +99,17 @@ public class ServletFlights extends HttpServlet {
         switch(sa){
             case "AdminFlightManifest":
                 // need flight_id
-                Flights flight =FlightService.getFlightById(Integer.parseInt(req.getHeader("flightID").substring(1, req.getHeader("flightID").length()-1)));
-                List<People> passengerManifest = PeopleService.getPassengersByFlight(flight.getFlight_id()); // might need to change this method... using flights Object
 
-                System.out.println("DEBUG: Manifest Created");
-                String manifestJSON = "{";
-                for (People passenger:passengerManifest) {
-                    int pid =passenger.getPeople_id();
-                    String username = passenger.getUsername();
-                    manifestJSON=manifestJSON+"ID: "+pid+"  Username: "+username+",\n";
-                }
-                manifestJSON= manifestJSON+"}";
-                // TODO send manifestJSON using JavaScript to AdminViewManifest
-                // TODO: google how to send JSON back to html page
-                System.out.println("DEBUG: Manifest JSON= "+manifestJSON);
-                resp.getWriter().write(manifestJSON);
+                int manifest_id = Integer.parseInt(req.getHeader("flight_ID"));
+                Flights flight =FlightService.getFlightById(manifest_id);
+                List<Tickets_People_Flights> passengerManifest = TicketService.getTicketsByFlight(flight); // might need to change this method... using flights Object
+
+                System.out.println("DEBUG: Manifest Created, size: "+passengerManifest.size());
+
+                System.out.println("DEBUG: Manifest JSON");
+                ObjectMapper mapper = new ObjectMapper();
+                resp.setContentType("application/json");
+                resp.getWriter().write(mapper.writeValueAsString(passengerManifest));
                 resp.setStatus(200);
 
                 break;
