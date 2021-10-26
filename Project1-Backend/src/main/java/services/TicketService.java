@@ -5,6 +5,7 @@ import models.People;
 import models.Tickets_People_Flights;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -20,8 +21,11 @@ public class TicketService {
 
     //User - buy a TICKET (buying multiple tickets runs this multiple times)
     public static void buyNewTicket (Tickets_People_Flights tpf){
-        // if(locked=false) then proceed... going to implement before hibernate... a validator somewhere
-        session.save(tpf);}  // Use the session to save the Object tpf into database
+
+        session.beginTransaction();
+        session.save(tpf);
+        session.getTransaction().commit();
+    }
 
 
     //User - CANCEL a ticket // Admin will also use

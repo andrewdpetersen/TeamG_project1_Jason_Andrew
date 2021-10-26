@@ -54,13 +54,19 @@ public class ServletTickets extends HttpServlet {
                     Flights addtpfFlight = FlightService.getFlightById(Integer.parseInt(uptickets[4].substring(1,uptickets[4].length()-1))); // sets flight
                     People addtpfPerson = PeopleService.getPersonById(Integer.parseInt(userIdAsString)); // sets user
                     addtpf.setChecked_in(false);
+
+                    if(dbg){
+                        System.out.println(addtpfPerson.getPeople_id());
+                        System.out.println(addtpfFlight.getFlight_id());
+                    }
+
                     addtpf.setFlight(addtpfFlight);
                     addtpf.setPerson(addtpfPerson);
 
                     TicketService.buyNewTicket(addtpf);
                     numberOfTickets--;
                 }
-
+                System.out.println("DEBUG: Method called");
                 resp.setContentType("text/plain");
                 resp.setStatus(200);
                 break;

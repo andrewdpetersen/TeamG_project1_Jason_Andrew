@@ -34,7 +34,7 @@ public class Flights {
     @Column
     private Boolean locked_For_Takeoff;
 
-    @OneToMany(mappedBy = "ticket_id",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "flight",cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<Tickets_People_Flights> ticketList;
 

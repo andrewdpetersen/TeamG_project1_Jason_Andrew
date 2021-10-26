@@ -1,5 +1,8 @@
 package models;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 
 /**
@@ -19,11 +22,11 @@ public class Tickets_People_Flights {
     private Boolean checked_in;
 
     @ManyToOne
-    @JoinColumn(name = "people_id",nullable=false)
+    @JoinColumn(nullable=false)
     private People person;
 
     @ManyToOne
-    @JoinColumn(name = "flight_id",nullable = false)
+    @JoinColumn(nullable = false)
     private Flights flight;
 
     public Tickets_People_Flights() {

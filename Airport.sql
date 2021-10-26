@@ -10,3 +10,11 @@ INSERT INTO people (username, access_level, password) VALUES ('testuser',1,'test
 Select * FROM  people;
 Select * FROM  flights;
 Select * FROM  tickets; 
+
+DROP DAtabase AirportKiosk;
+CREATE DATABASE AirportKiosk;
+USE AirportKiosk;
+
+DROP TABLE tickets;
+DROP TABLE people;
+DROP TABLE flights;
