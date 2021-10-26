@@ -27,16 +27,17 @@ let flightToManifest = urlParameters.get("flightID");
 const form = document.getElementById("delete_customer");
 form.addEventListener("submit",function(event) {
     event.preventDefault();//prevents the default "submit" event
-    SubmitForm();
+    SubmitAdminCancelTicketForm();
+    form.reset();
 });
 
-async function SubmitForm() {
+async function SubmitAdminCancelTicketForm() {
     const customerID = form.querySelector("#customer_id");
-    var queryString = decodeURIComponent(window.location.search);
-    const fid = queryString.get("flightID");
+    let flightParameters = new URLSearchParams(window.location.search);
+    let flightToManifest = flightParameters.get("flightID");
     let object = {//creates an object in JSON format
         "customerID": customerID.value,
-        "flightID": fid.value
+        "flightID": flightToManifest
         //key is the variable we are assigning the value to
     }
     let response = await fetch("http://localhost:8080/Project1-Backend/people", {
@@ -47,10 +48,7 @@ async function SubmitForm() {
         //one to add an object, one to update, one to delete, one to get one object, one to get a list
         body: JSON.stringify(object)//makes the json into a string to send
     });
+    return response.text().then(function(){
+        alert("Passenger successfully removed from flight.")
+    });
 }
-
-// TODO: add response logic if necessary
-//The only times we need a response: user-Flights, admin-Manifest, admin-Flights
-
-//let json = response.json();
-//And the response logic goes here

@@ -40,7 +40,9 @@ public class TicketService {
         Query getUserTicketsOnFlight = session.createQuery(query);
         List<Tickets_People_Flights> cancelledTickets= getUserTicketsOnFlight.getResultList();
         for (Tickets_People_Flights ticket:cancelledTickets) {
+            session.beginTransaction();
             session.delete(ticket);
+            session.getTransaction().commit();
         }
     }
 
@@ -69,11 +71,6 @@ public class TicketService {
         ticket.setChecked_in(true);
         session.update(ticket);
         session.getTransaction().commit();
-    }
-
-    // Pilot - LOCK ability TODO lookup how lock works
-    public static void lockoutCancel (int flight_id){
-        //sess.lock(flight_id); // lock the ability to cancel flight for Users and Admin or BuyNewTickets
     }
 
     public static SessionFactory getSessionFactory() {

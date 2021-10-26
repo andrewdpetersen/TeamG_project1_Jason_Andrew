@@ -52,9 +52,8 @@ public class ServletPeople extends HttpServlet {
                 String msgTicketCancelled = "Flight ticket canceled for customer " + dcustomer + " on flight " + dflight + ".";
                 if (dbg) {
                     System.out.println(msgTicketCancelled);
-                }// debug send to console
-
-                //TODO: write response
+                }
+                resp.setContentType("text/plain");
                 resp.getWriter().println(msgTicketCancelled); // send to webpage
                 resp.setStatus(200);
                 break;
