@@ -68,9 +68,14 @@ public class ServletFlights extends HttpServlet {
                     Flights acf = FlightService.getFlightById(Integer.parseInt(acflight2));
                     System.out.println("DEBUG: flight_id parsed");
 
-                    FlightService.deleteFlight(acf);
+                    if(acf.getLocked_For_Takeoff()){
+                        resp.setStatus(400);
+                        FileLogger.getFileLogger().console().threshold(1).writeLog("Flight has already taken off",1);
+                    }else {
+                        FlightService.deleteFlight(acf);
 
-                    resp.setStatus(200);
+                        resp.setStatus(200);
+                    }
                     break;
 
                 case "PilotTakeoffLock":

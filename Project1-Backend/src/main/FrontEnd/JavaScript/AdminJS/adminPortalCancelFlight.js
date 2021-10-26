@@ -16,4 +16,11 @@ async function SubmitAdminCancelForm() {
             "Servlet-action": "AdminCancelFlight"},
         body: JSON.stringify(cancelledFlight)//makes the json into a string to send
     });
+    return response.text().then(function(){
+        if(response.status==200){
+            alert(`Flight cancelled. Thank you for using AirPortal.`);
+        }else{
+            alert("The flight you selected has already departed");
+        }
+    });
 }

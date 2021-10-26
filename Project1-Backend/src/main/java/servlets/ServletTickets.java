@@ -69,15 +69,23 @@ public class ServletTickets extends HttpServlet {
                             System.out.println(addtpfFlight.getFlight_id());
                         }
 
-                        addtpf.setFlight(addtpfFlight);
-                        addtpf.setPerson(addtpfPerson);
+                        if (addtpfFlight.getLocked_For_Takeoff()) {
+                            resp.setContentType("text/plain");
+                            FileLogger.getFileLogger().console().threshold(1).writeLog("Flight has already taken off",1);
+                            resp.setStatus(400);
+                            numberOfTickets--;
+                        } else {
+                            addtpf.setFlight(addtpfFlight);
+                            addtpf.setPerson(addtpfPerson);
 
-                        TicketService.buyNewTicket(addtpf);
-                        numberOfTickets--;
+                            TicketService.buyNewTicket(addtpf);
+                            numberOfTickets--;
+                            System.out.println("DEBUG: Method called");
+                            resp.setContentType("text/plain");
+                            resp.setStatus(200);
+                        }
+
                     }
-                    System.out.println("DEBUG: Method called");
-                    resp.setContentType("text/plain");
-                    resp.setStatus(200);
                     break;
 
                 case "UserCancelTicket":
@@ -87,15 +95,24 @@ public class ServletTickets extends HttpServlet {
                     System.out.println(ucticket);
                     Integer cticketID = Integer.parseInt(ucticket[2].substring(1, ucticket[2].length() - 1));
                     Tickets_People_Flights cticket = TicketService.getTicketByID(cticketID);
-                    TicketService.cancelTicket(cticket);
 
-                    String msgCancelledTicket = "Ticket number " + ucticket[2].substring(1, ucticket[2].length() - 1) + " cancelled. Thank you for using AirPortal.";
-                    if (dbg) {
-                        System.out.println(msgCancelledTicket);
+                    Integer flight_id = cticket.getFlight().getFlight_id();
+                    Flights flight = FlightService.getFlightById(flight_id);
+                    if(flight.getLocked_For_Takeoff()){
+                        resp.setContentType("text/plain");
+                        FileLogger.getFileLogger().console().threshold(1).writeLog("Flight has already taken off",1);
+                        resp.setStatus(400);
+                    }else {
+
+                        TicketService.cancelTicket(cticket);
+
+                        String msgCancelledTicket = "Ticket number " + ucticket[2].substring(1, ucticket[2].length() - 1) + " cancelled. Thank you for using AirPortal.";
+                        if (dbg) {
+                            System.out.println(msgCancelledTicket);
+                        }
+                        resp.setContentType("text/plain");
+                        resp.setStatus(200);
                     }
-                    resp.setContentType("text/plain");
-                    resp.setStatus(200);
-
                     break;
                 case "UserCheckin":
                     String[] ucheckin = JSONSplitter.jsonSplitter(jsonText);

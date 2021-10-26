@@ -21,6 +21,10 @@ async function SubmitUPCTForm() {
     });
 
     return response.text().then(function(){
-        alert(`Ticket cancelled. Thank you for using AirPortal.`)
+        if(response.status==200){
+            alert(`Ticket cancelled. Thank you for using AirPortal.`);
+        }else{
+            alert("The flight you selected has already departed");
+        }
     });
 }

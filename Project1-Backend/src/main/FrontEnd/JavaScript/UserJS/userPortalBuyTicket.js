@@ -30,7 +30,11 @@ async function SubmitUPBTForm() {
     });
 
     return response.text().then(function(){
-        alert("Ticket successfully purchased! Please go to the counter to get your confirmation number.")
+        if(response.status==200) {
+            alert("Ticket successfully purchased! Please go to the counter to get your confirmation number.");
+        }else{
+            alert("The flight you selected has already departed");
+        }
     });
 }
 
