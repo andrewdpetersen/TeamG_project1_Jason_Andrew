@@ -21,10 +21,9 @@ async function SubmitUVFlights() {
     for (let element of jsonFlightSchedule) {
         let tr = flightSchedule.insertRow(-1);
         for (let key in element) {
-            if(key=="flight_id"||key=="departure_city"||key=="arrival_city"||key=="locked_For_Takeoff") {
-                let cell = tr.insertCell(-1);
-                cell.innerHTML = element[key];
-            }
+            let cell = tr.insertCell(-1);
+            cell.innerHTML = element[key];
+
         }
     }
 }
