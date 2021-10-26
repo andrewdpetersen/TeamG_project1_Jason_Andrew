@@ -70,11 +70,13 @@ public class FlightService {
 
     //Maybe more get methods based on needs...
     public static void PilotTakeoffLock(Flights flight){
+        session.beginTransaction();
         System.out.println("DEBUG: PilotTakeoffLock method called");
         Flights takeoffFlight = session.load(Flights.class, flight.getFlight_id());
         System.out.println("DEBUG: session.load flight successful");
         takeoffFlight.setLocked_For_Takeoff(true);
         session.save(takeoffFlight);
+        session.getTransaction().commit();
     }
 
     public static Session getSession(){

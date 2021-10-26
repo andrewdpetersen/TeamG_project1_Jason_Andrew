@@ -1,10 +1,10 @@
 const form = document.getElementById("takeoff_lock");
 form.addEventListener("submit",function(event) {
     event.preventDefault();//prevents the default "submit" event
-    SubmitForm();
+    SubmitTakeoffForm();
 });
 
-async function SubmitForm() {
+async function SubmitTakeoffForm() {
     const fid = form.querySelector("#flightID");
     const spin = form.querySelector("#specialPin");
     let object = {//creates an object in JSON format
@@ -19,6 +19,12 @@ async function SubmitForm() {
         //one to add an object, one to update, one to delete, one to get one object, one to get a list
         body: JSON.stringify(object)//makes the json into a string to send
     });
+
+    return response.text().then(function(){
+        alert(`CABIN LOCKED`);
+        alert(`PRE-FLIGHT CHECKS SUCCESSFUL`);
+        alert(`CLEARED FOR TAKEOFF`);
+    })
 }
 
 // TODO: add response logic if necessary... change this page Flight # is Locked and Takeoff in progress.

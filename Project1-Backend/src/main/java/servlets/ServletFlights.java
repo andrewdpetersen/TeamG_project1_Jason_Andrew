@@ -85,6 +85,7 @@ public class ServletFlights extends HttpServlet {
                     System.out.println("DEBUG: getFlightById success");}
                 FlightService.PilotTakeoffLock(ptl);
 
+                resp.setContentType("text/plain");
                 resp.getWriter().println("Flight id: "+ptlock[1]+" is locked and ready for takeoff");
                 resp.setStatus(200);
                 break;
@@ -94,7 +95,6 @@ public class ServletFlights extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        // TODO 2 ACTIONS... AdminFlightManifest, UserViewFlights... no body
         String sa = req.getHeader("Servlet-action");
         switch(sa){
             case "AdminFlightManifest":
@@ -104,9 +104,6 @@ public class ServletFlights extends HttpServlet {
                 Flights flight =FlightService.getFlightById(manifest_id);
                 List<Tickets_People_Flights> passengerManifest = TicketService.getTicketsByFlight(flight); // might need to change this method... using flights Object
 
-                System.out.println("DEBUG: Manifest Created, size: "+passengerManifest.size());
-
-                System.out.println("DEBUG: Manifest JSON");
                 ObjectMapper mapper = new ObjectMapper();
                 resp.setContentType("application/json");
                 resp.getWriter().write(mapper.writeValueAsString(passengerManifest));
