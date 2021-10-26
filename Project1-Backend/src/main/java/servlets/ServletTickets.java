@@ -94,24 +94,32 @@ public class ServletTickets extends HttpServlet {
 
                     System.out.println(ucticket);
                     Integer cticketID = Integer.parseInt(ucticket[2].substring(1, ucticket[2].length() - 1));
+                    Integer people_id = Integer.parseInt(ucticket[4].substring(1, ucticket[4].length() - 1));
                     Tickets_People_Flights cticket = TicketService.getTicketByID(cticketID);
 
-                    Integer flight_id = cticket.getFlight().getFlight_id();
-                    Flights flight = FlightService.getFlightById(flight_id);
-                    if(flight.getLocked_For_Takeoff()){
+                    if(cticket.getPerson().getPeople_id()!=people_id){
                         resp.setContentType("text/plain");
-                        FileLogger.getFileLogger().console().threshold(1).writeLog("Flight has already taken off",1);
-                        resp.setStatus(400);
+                        FileLogger.getFileLogger().console().threshold(1).writeLog("That ticket does not belong to you, please try again.",1);
+                        resp.setStatus(409);
                     }else {
 
-                        TicketService.cancelTicket(cticket);
+                        Integer flight_id = cticket.getFlight().getFlight_id();
+                        Flights flight = FlightService.getFlightById(flight_id);
+                        if (flight.getLocked_For_Takeoff()) {
+                            resp.setContentType("text/plain");
+                            FileLogger.getFileLogger().console().threshold(1).writeLog("Flight has already taken off", 1);
+                            resp.setStatus(400);
+                        } else {
 
-                        String msgCancelledTicket = "Ticket number " + ucticket[2].substring(1, ucticket[2].length() - 1) + " cancelled. Thank you for using AirPortal.";
-                        if (dbg) {
-                            System.out.println(msgCancelledTicket);
+                            TicketService.cancelTicket(cticket);
+
+                            String msgCancelledTicket = "Ticket number " + ucticket[2].substring(1, ucticket[2].length() - 1) + " cancelled. Thank you for using AirPortal.";
+                            if (dbg) {
+                                System.out.println(msgCancelledTicket);
+                            }
+                            resp.setContentType("text/plain");
+                            resp.setStatus(200);
                         }
-                        resp.setContentType("text/plain");
-                        resp.setStatus(200);
                     }
                     break;
                 case "UserCheckin":

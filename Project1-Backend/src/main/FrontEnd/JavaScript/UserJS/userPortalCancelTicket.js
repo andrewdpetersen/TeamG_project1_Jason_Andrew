@@ -7,8 +7,11 @@ userportalcancelform.addEventListener("submit",function(event) {
 
 async function SubmitUPCTForm() {
     const ucts = userportalcancelform.querySelector("#user_cancel_ticket_id");
+    const queryString = window.location.search;
+    const user_ID = new URLSearchParams(queryString).get("userID");
     let object = {//creates an object in JSON format
         "userCancelTickeID": ucts.value,//assigning the value to send to servlet via fetch.
+        "userID":user_ID
     }
 
     let response = await fetch("http://localhost:8080/Project1-Backend/tickets", {
@@ -23,8 +26,10 @@ async function SubmitUPCTForm() {
     return response.text().then(function(){
         if(response.status==200){
             alert(`Ticket cancelled. Thank you for using AirPortal.`);
-        }else{
+        }else if(response.status==400){
             alert("The flight you selected has already departed");
+        }else{
+            alert("That ticket does not belong to you, please try again.");
         }
     });
 }
