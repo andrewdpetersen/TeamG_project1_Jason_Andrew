@@ -1,5 +1,7 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -33,6 +35,7 @@ public class Flights {
     private Boolean locked_For_Takeoff;
 
     @OneToMany(mappedBy = "ticket_id",cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Tickets_People_Flights> ticketList;
 
     public Flights() {

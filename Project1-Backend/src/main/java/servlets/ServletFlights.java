@@ -116,6 +116,7 @@ public class ServletFlights extends HttpServlet {
             case "UserViewFlights":
                 // need departure_city and arrival_city
                 List<Flights> flightSchedule = FlightService.getFlightsByArrivalDestination(req.getHeader("selectDepartureCity"), req.getHeader("selectArrivalCity"));
+                System.out.println("DEBUG list size: "+flightSchedule.size());
                 resp.setContentType("application/json");
                 ObjectMapper flightMapper = new ObjectMapper();
                 resp.getWriter().write(flightMapper.writeValueAsString(flightSchedule));
