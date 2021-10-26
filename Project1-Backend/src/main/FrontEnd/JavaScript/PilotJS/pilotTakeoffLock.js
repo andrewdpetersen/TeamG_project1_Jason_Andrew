@@ -2,6 +2,7 @@ const form = document.getElementById("takeoff_lock");
 form.addEventListener("submit",function(event) {
     event.preventDefault();//prevents the default "submit" event
     SubmitTakeoffForm();
+    form.reset();
 });
 
 async function SubmitTakeoffForm() {
@@ -26,9 +27,3 @@ async function SubmitTakeoffForm() {
         alert(`CLEARED FOR TAKEOFF`);
     })
 }
-
-// TODO: add response logic if necessary... change this page Flight # is Locked and Takeoff in progress.
-//The only times we need a response: user-Flights, admin-Manifest, admin-Flights
-
-//let json = response.json();
-//And the response logic goes here
