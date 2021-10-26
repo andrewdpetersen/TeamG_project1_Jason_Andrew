@@ -14,10 +14,8 @@ let flightToManifest = urlParameters.get("flightID");
     for(let element of jsonManifest) {
         let tr = table.insertRow(-1);
         for(let key in element) {
-            if(key=="ticket_id") {
-                let cell = tr.insertCell(-1);
-                cell.innerHTML = element[key];
-            }
+            let cell = tr.insertCell(-1);
+            cell.innerHTML = element[key];
         }
     }
 })();

@@ -15,9 +15,3 @@ async function SubmitAdminFlightManifestForm() {
     var queryString = "?flightID="+manifestFlight_id.value;
     window.location.href = "AdminViewManifest.html"+queryString;
 }
-
-// TODO: add response logic if necessary
-//The only times we need a response: user-Flights, admin-Manifest, admin-Flights
-
-//let json = response.json();
-//And the response logic goes here

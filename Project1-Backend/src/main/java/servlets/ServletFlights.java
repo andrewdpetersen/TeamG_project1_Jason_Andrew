@@ -3,6 +3,7 @@ package servlets;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Flights;
 import models.People;
+import models.TicketManifest;
 import models.Tickets_People_Flights;
 import services.FlightService;
 import services.PeopleService;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -119,9 +121,17 @@ public class ServletFlights extends HttpServlet {
                 Flights flight =FlightService.getFlightById(manifest_id);
                 List<Tickets_People_Flights> passengerManifest = TicketService.getTicketsByFlight(flight); // might need to change this method... using flights Object
 
+                List<TicketManifest> fullTicketManifest = new LinkedList<>();
+                for(Tickets_People_Flights ticket:passengerManifest){
+                    TicketManifest ticketForManifest = new TicketManifest();
+                    ticketForManifest.setTicket_id(ticket.getTicket_id());
+                    ticketForManifest.setPeople_id(ticket.getPerson().getPeople_id());
+                    ticketForManifest.setUsername(ticket.getPerson().getUsername());
+                    fullTicketManifest.add(ticketForManifest);
+                }
                 ObjectMapper mapper = new ObjectMapper();
                 resp.setContentType("application/json");
-                resp.getWriter().write(mapper.writeValueAsString(passengerManifest));
+                resp.getWriter().write(mapper.writeValueAsString(fullTicketManifest));
                 resp.setStatus(200);
 
                 break;
