@@ -25,11 +25,8 @@ public class Flights {
     @Column
     private String arrival_city;
 
-//    @Column
-//    private String date;
-//
-//    @Column
-//    private String time;
+    @Column
+    private String date;
 
     @Column
     private Boolean locked_For_Takeoff;
@@ -65,21 +62,15 @@ public class Flights {
         this.arrival_city = arrival_city;
     }
 
-//    public String getDate() {
-//        return date;
-//    }
+    public String getDate() {
+        return date;
+    }
 
-//    public void setDate(String date) {
-//        this.date = date;
-//    }
-//
-//    public String getTime() {
-//        return time;
-//    }
-//
-//    public void setTime(String time) {
-//        this.time = time;
-//    }
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+
 
     public Boolean getLocked_For_Takeoff() {
         return locked_For_Takeoff;
