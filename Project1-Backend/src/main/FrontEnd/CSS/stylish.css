@@ -7,8 +7,8 @@
 .green { /* sets the class = "green" to have this style, multiple classes OK */
    color:green; /* text color */
 }
-.admin{ /* sets the class="admin" to have this style */
-    background-color:red;
+.admintext{ /* sets the class="admin" to have this style */
+    color: white;
 }
 #test{ /* sets the id="test" to have this style */
     color:red;
@@ -49,4 +49,11 @@ margin-right: auto;
 
 .bgplane{
    background: url("./img/GreenWayLogoLarge.jpg");
+}
+.eyemg {
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
