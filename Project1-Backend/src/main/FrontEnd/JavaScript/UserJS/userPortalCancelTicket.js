@@ -24,6 +24,7 @@ async function SubmitUPCTForm() {
     });
 
     return await response.text().then(function(){
+        console.log(response.status)
         if(response.status==200){
             alert(`Ticket cancelled. Thank you for using AirPortal.`);
         }else if(response.status==400){

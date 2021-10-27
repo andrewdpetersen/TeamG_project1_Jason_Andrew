@@ -31,6 +31,7 @@ async function SubmitUPBTForm() {
     });
 
     return await response.text().then(function(){
+        console.log(response.status)
         if(response.status==200) {
             alert("Ticket successfully purchased! Please go to the counter to get your confirmation number.");
         }else{
