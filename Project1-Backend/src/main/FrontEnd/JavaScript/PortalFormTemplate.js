@@ -14,6 +14,7 @@ async function SubmitForm() {
         "key3": nameOfVariable3.value//TODO: make key similar to #idOfInput above
     }
     //TODO: Change end of URL depending on server we want to hit.. /people, /tickets, /flights
+    //P1kiosk-env.eba-djrhmwps.us-east-2.elasticbeanstalk.com/flights
     let response = await fetch("http://localhost:8080/Project1-Backend/tickets", {
         method: "POST",//TODO: change method based on whether we are adding/updating data or getting data
         headers: {"Content-Type": "application/json"},//TODO: might want to add a header to tell the servlet what to do
