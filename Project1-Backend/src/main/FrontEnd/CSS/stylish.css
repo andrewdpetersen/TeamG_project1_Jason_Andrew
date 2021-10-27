@@ -31,7 +31,22 @@
 h1{
 font-size: 50px;
 }
+.centertext{
+  text-align: center;
+  vertical-align: middle;
+}
 
 h6{
 font-size: 7px;
+}
+.fitty{
+max-height: 200px;
+max-width: 200px;
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
+
+.bgplane{
+   background: url("./img/GreenWayLogoLarge.jpg");
 }

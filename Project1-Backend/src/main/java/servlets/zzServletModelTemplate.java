@@ -41,7 +41,7 @@ public class zzServletModelTemplate extends HttpServlet {
                 // unique to action and the servlet, for example:
                 // UserPurchaseTickets on tickets will need us to unmarshall a flight ID and a number of
                 // tickets, and save that number of tickets in the DB using hibernate.
-                // TODO: unmarshall
+                // TODO: unmarshall - how to unmarshall... method()
                 // String[] namelikecase = JSONSplitter.jsonSplitter(jsonText);
                 // TODO: setup objects, add data from unmarshalled JSON
                 // TODO: instantiate new object of type ________
