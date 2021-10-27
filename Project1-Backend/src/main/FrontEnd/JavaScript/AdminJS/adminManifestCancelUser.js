@@ -1,7 +1,8 @@
 let urlParameters = new URLSearchParams(window.location.search);
 let flightToManifest = urlParameters.get("flightID");
 (async function getAdminPassengerManifest() {
-    let response = await fetch("http://localhost:8080/Project1-Backend/flights", {
+    //local "http://localhost:8080/Project1-Backend/flights"
+    let response = await fetch("http://teamgairportkiosk-env.eba-ymppfvdg.us-east-2.elasticbeanstalk.com/flights", {
         method: "GET",
         headers: {"Content-Type": "application/json",
             "Servlet-action": "AdminFlightManifest",
@@ -38,7 +39,8 @@ async function SubmitAdminCancelTicketForm() {
         "flightID": flightToManifest
         //key is the variable we are assigning the value to
     }
-    let response = await fetch("http://localhost:8080/Project1-Backend/people", {
+    //local "http://localhost:8080/Project1-Backend/people"
+    let response = await fetch("http://teamgairportkiosk-env.eba-ymppfvdg.us-east-2.elasticbeanstalk.com/people", {
         method: "POST",
         headers: {"Content-Type": "application/json",
         "Servlet-action" : "DeleteCustomerFlight"

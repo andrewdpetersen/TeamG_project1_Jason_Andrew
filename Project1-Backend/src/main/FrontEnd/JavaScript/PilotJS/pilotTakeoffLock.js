@@ -12,7 +12,8 @@ async function SubmitTakeoffForm() {
         "flightID": fid.value,//key is the variable we are assigning the value to
         "specialPin": spin.value,//the value comes from form input
     }
-    let response = await fetch("http://localhost:8080/Project1-Backend/flights", {
+    //local "http://localhost:8080/Project1-Backend/flights"
+    let response = await fetch("http://teamgairportkiosk-env.eba-ymppfvdg.us-east-2.elasticbeanstalk.com/flights", {
         method: "POST",
         headers: {"Content-Type": "application/json",
             "Servlet-action": "PilotTakeoffLock"

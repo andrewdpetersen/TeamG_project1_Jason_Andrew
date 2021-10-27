@@ -10,7 +10,8 @@ async function SubmitAdminCancelForm() {
     let cancelledFlight = {//creates an object in JSON format
         "flight_id": flight_id.value
     }
-    let response = await fetch("http://localhost:8080/Project1-Backend/flights", {
+    //local "http://localhost:8080/Project1-Backend/flights"
+    let response = await fetch("http://teamgairportkiosk-env.eba-ymppfvdg.us-east-2.elasticbeanstalk.com/flights", {
         method: "POST",
         headers: {"Content-Type": "application/json",
             "Servlet-action": "AdminCancelFlight"},
