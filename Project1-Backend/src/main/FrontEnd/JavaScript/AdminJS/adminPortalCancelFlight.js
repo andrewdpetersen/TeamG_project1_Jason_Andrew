@@ -9,8 +9,8 @@ async function SubmitAdminCancelForm() {
     const flight_id = adminCancelForm.querySelector("#cancel_flightID");
     let cancelledFlight = {//creates an object in JSON format
         "flight_id": flight_id.value
-    }
-    let response = await fetch("http://localhost:8080/Project1-Backend/flights", {
+    } //P1kiosk-env.eba-djrhmwps.us-east-2.elasticbeanstalk.com/flights //http://localhost:8080/Project1-Backend/flights
+    let response = await fetch("P1kiosk-env.eba-djrhmwps.us-east-2.elasticbeanstalk.com/flights", {
         method: "POST",
         headers: {"Content-Type": "application/json",
             "Servlet-action": "AdminCancelFlight"},

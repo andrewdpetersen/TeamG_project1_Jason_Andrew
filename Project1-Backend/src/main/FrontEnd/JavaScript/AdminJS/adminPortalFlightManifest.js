@@ -6,7 +6,8 @@ adminManifestForm.addEventListener("submit",function(event) {
 
 async function SubmitAdminFlightManifestForm() {
     const manifestFlight_id = adminManifestForm.querySelector("#manifest_flightID");
-    let response = await fetch("http://localhost:8080/Project1-Backend/flights", {
+    // // http://localhost:8080/Project1-Backend/flights
+    let response = await fetch("P1kiosk-env.eba-djrhmwps.us-east-2.elasticbeanstalk.com/flights", {
         method: "GET",
         headers: {"Content-Type": "application/json",
             "Servlet-action": "AdminFlightManifest",

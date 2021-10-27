@@ -13,8 +13,8 @@ async function SubmitAdminAddFlightForm() {
         "departureCity": departure_city.value,
         "arrivalCity": arrival_city.value,
         "flightDate": flight_date.value
-    }
-    let response = await fetch("http://localhost:8080/Project1-Backend/flights", {
+    }  //P1kiosk-env.eba-djrhmwps.us-east-2.elasticbeanstalk.com/flights //http://localhost:8080/Project1-Backend/flights
+    let response = await fetch("P1kiosk-env.eba-djrhmwps.us-east-2.elasticbeanstalk.com/flights", {
         method: "POST",
         headers: {"Content-Type": "application/json",
         "Servlet-action": "AdminScheduleFlight"},
