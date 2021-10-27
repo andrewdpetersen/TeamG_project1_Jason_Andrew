@@ -23,7 +23,7 @@ async function SubmitUPCTForm() {
         body: JSON.stringify(object)//makes the json into a string to send
     });
 
-    return response.text().then(function(){
+    return await response.text().then(function(){
         if(response.status==200){
             alert(`Ticket cancelled. Thank you for using AirPortal.`);
         }else if(response.status==400){
