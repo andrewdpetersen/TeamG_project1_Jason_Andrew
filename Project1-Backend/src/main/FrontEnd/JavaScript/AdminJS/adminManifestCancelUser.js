@@ -1,9 +1,8 @@
 let urlParameters = new URLSearchParams(window.location.search);
 let flightToManifest = urlParameters.get("flightID");
 (async function getAdminPassengerManifest() {
-//P1kiosk-env.eba-djrhmwps.us-east-2.elasticbeanstalk.com/flights
-//http://localhost:8080/Project1-Backend/flights
-    let response = await fetch("P1kiosk-env.eba-djrhmwps.us-east-2.elasticbeanstalk.com/flights", {
+    //local "http://localhost:8080/Project1-Backend/flights"
+    let response = await fetch("http://teamgairportkiosk-env.eba-ymppfvdg.us-east-2.elasticbeanstalk.com/flights", {
         method: "GET",
         headers: {"Content-Type": "application/json",
             "Servlet-action": "AdminFlightManifest",
@@ -39,8 +38,14 @@ async function SubmitAdminCancelTicketForm() {
         "customerID": customerID.value,
         "flightID": flightToManifest
         //key is the variable we are assigning the value to
+<<<<<<< HEAD
     } //P1kiosk-env.eba-djrhmwps.us-east-2.elasticbeanstalk.com/people //http://localhost:8080/Project1-Backend/people
     let response = await fetch("P1kiosk-env.eba-djrhmwps.us-east-2.elasticbeanstalk.com/people", {
+=======
+    }
+    //local "http://localhost:8080/Project1-Backend/people"
+    let response = await fetch("http://teamgairportkiosk-env.eba-ymppfvdg.us-east-2.elasticbeanstalk.com/people", {
+>>>>>>> aa9e1af1bb7a1bb8c85c8815479bfee2087e9956
         method: "POST",
         headers: {"Content-Type": "application/json",
         "Servlet-action" : "DeleteCustomerFlight"

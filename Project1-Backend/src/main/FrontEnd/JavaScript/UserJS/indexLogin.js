@@ -11,8 +11,8 @@ async function SubmitForm() {
         "username": unm.value,//key is the variable we are assigning the value to
         "password": pwd.value,//the value comes from form input
     }
-
-    let response = await fetch("http://localhost:8080/Project1-Backend/people", {
+//local "http://localhost:8080/Project1-Backend/people"
+    let response = await fetch("http://teamgairportkiosk-env.eba-ymppfvdg.us-east-2.elasticbeanstalk.com/people", {
         method: "POST",
         headers: {"Content-Type": "application/json",
         "Servlet-action" : "Login"
@@ -26,11 +26,11 @@ async function SubmitForm() {
         let userID = json.people_id;
         console.log(access);
             if(access ==1){
-                window.location.href="UserPortal/UserPortal.html?userID="+`${userID}`;
+                window.location.href="../FrontEnd/HTML/UserPortal/UserPortal.html?userID="+`${userID}`;
             }else if(access ==2){
-                window.location.href="PilotPortal/PilotPortal.html";
+                window.location.href="../FrontEnd/HTML/PilotPortal/PilotPortal.html";
             }else if(access ==3){
-                window.location.href="AdminPortal/AdminPortal.html";
+                window.location.href="../FrontEnd/HTML/AdminPortal/AdminPortal.html";
             }else{
                 alert("Username does not exist!");
             }

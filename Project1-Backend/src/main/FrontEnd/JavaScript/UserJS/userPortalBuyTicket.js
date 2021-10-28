@@ -18,7 +18,8 @@ async function SubmitUPBTForm() {
         "numberOfTickets": nots.value,//key is the variable we are assigning the value to
         "userFlightID": ufid.value,//the value comes from form input
     }
-    let response = await fetch("http://localhost:8080/Project1-Backend/tickets", {
+    //local "http://localhost:8080/Project1-Backend/tickets"
+    let response = await fetch("http://teamgairportkiosk-env.eba-ymppfvdg.us-east-2.elasticbeanstalk.com/tickets", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -29,7 +30,8 @@ async function SubmitUPBTForm() {
         body: JSON.stringify(object)//makes the json into a string to send
     });
 
-    return response.text().then(function(){
+    return await response.text().then(function(){
+        console.log(response.status)
         if(response.status==200) {
             alert("Ticket successfully purchased! Please go to the counter to get your confirmation number.");
         }else{
@@ -37,9 +39,3 @@ async function SubmitUPBTForm() {
         }
     });
 }
-
-// TODO: add response logic if necessary - confirmation number... or "You've purchased xx tickets for flight y from Chicago to Miami
-//The only times we need a response: user-Flights, admin-Manifest, admin-Flights
-
-//let json = response.json();
-//And the response logic goes here

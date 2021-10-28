@@ -5,8 +5,8 @@ async function SubmitUVFlights() {
 
     const depart_City = new URLSearchParams(queryString).get("departure_city");
     const arrive_City = new URLSearchParams(queryString).get("arrival_city");
-
-    let response = await fetch("http://localhost:8080/Project1-Backend/flights", {
+//local "http://localhost:8080/Project1-Backend/flights"
+    let response = await fetch("http://teamgairportkiosk-env.eba-ymppfvdg.us-east-2.elasticbeanstalk.com/flights", {
         method: "GET",//NO BODY on GET requests
         headers: {
             "Content-Type": "application/json",

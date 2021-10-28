@@ -11,7 +11,8 @@ async function SubmitUPCIForm() {
         "checkinTicketID": ctid.value,//key is the variable we are assigning the value to
 
     }
-    let response = await fetch("http://localhost:8080/Project1-Backend/tickets", {
+    //local "http://localhost:8080/Project1-Backend/tickets"
+    let response = await fetch("http://teamgairportkiosk-env.eba-ymppfvdg.us-east-2.elasticbeanstalk.com/tickets", {
         method: "POST",
         headers: {"Content-Type": "application/json",
         "Servlet-action": "UserCheckin"
@@ -24,11 +25,5 @@ async function SubmitUPCIForm() {
         alert(`Ticket checked in! Please proceed to gate G to board your flight.`)
     })
 }
-
-// TODO: add response logic if necessary - return CHECKED IN for Flight bbbbxxxxx
-//The only times we need a response: user-Flights, admin-Manifest, admin-Flights
-
-//let json = response.json();
-//And the response logic goes here
 
 

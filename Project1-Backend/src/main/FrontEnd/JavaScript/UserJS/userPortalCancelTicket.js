@@ -13,8 +13,8 @@ async function SubmitUPCTForm() {
         "userCancelTickeID": ucts.value,//assigning the value to send to servlet via fetch.
         "userID":user_ID
     }
-
-    let response = await fetch("http://localhost:8080/Project1-Backend/tickets", {
+//local "http://localhost:8080/Project1-Backend/tickets"
+    let response = await fetch("http://teamgairportkiosk-env.eba-ymppfvdg.us-east-2.elasticbeanstalk.com/tickets", {
         method: "POST",
         headers: {"Content-Type": "application/json",
         "Servlet-action" : "UserCancelTicket"
@@ -23,7 +23,8 @@ async function SubmitUPCTForm() {
         body: JSON.stringify(object)//makes the json into a string to send
     });
 
-    return response.text().then(function(){
+    return await response.text().then(function(){
+        console.log(response.status)
         if(response.status==200){
             alert(`Ticket cancelled. Thank you for using AirPortal.`);
         }else if(response.status==400){
