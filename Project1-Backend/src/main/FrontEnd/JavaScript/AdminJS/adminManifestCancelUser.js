@@ -39,7 +39,7 @@ async function SubmitAdminCancelTicketForm() {
         "customerID": customerID.value,
         "flightID": flightToManifest
         //key is the variable we are assigning the value to
-    } //P1kiosk-env.eba-djrhmwps.us-east-2.elasticbeanstalk.com/flights //http://localhost:8080/Project1-Backend/people
+    } //P1kiosk-env.eba-djrhmwps.us-east-2.elasticbeanstalk.com/people //http://localhost:8080/Project1-Backend/people
     let response = await fetch("P1kiosk-env.eba-djrhmwps.us-east-2.elasticbeanstalk.com/people", {
         method: "POST",
         headers: {"Content-Type": "application/json",
