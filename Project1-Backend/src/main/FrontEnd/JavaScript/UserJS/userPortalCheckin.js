@@ -12,7 +12,8 @@ async function SubmitUPCIForm() {
 
     }
     //local "http://localhost:8080/Project1-Backend/tickets"
-    let response = await fetch("http://teamgairportkiosk-env.eba-ymppfvdg.us-east-2.elasticbeanstalk.com/tickets", {
+    //remote "http://teamgairportkiosk-env.eba-ymppfvdg.us-east-2.elasticbeanstalk.com/tickets"
+    let response = await fetch("http://localhost:8080/Project1-Backend/tickets", {
         method: "POST",
         headers: {"Content-Type": "application/json",
         "Servlet-action": "UserCheckin"

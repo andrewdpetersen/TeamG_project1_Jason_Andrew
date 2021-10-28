@@ -15,7 +15,8 @@ async function SubmitAdminAddFlightForm() {
         "flightDate": flight_date.value
     }
     //local "http://localhost:8080/Project1-Backend/flights"
-    let response = await fetch("http://teamgairportkiosk-env.eba-ymppfvdg.us-east-2.elasticbeanstalk.com/flights", {
+    //remote "http://teamgairportkiosk-env.eba-ymppfvdg.us-east-2.elasticbeanstalk.com/flights"
+    let response = await fetch("http://localhost:8080/Project1-Backend/flights", {
         method: "POST",
         headers: {"Content-Type": "application/json",
         "Servlet-action": "AdminScheduleFlight"},

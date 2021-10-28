@@ -11,8 +11,9 @@ async function SubmitForm() {
         "username": unm.value,//key is the variable we are assigning the value to
         "password": pwd.value,//the value comes from form input
     }
-//local "http://localhost:8080/Project1-Backend/people"
-    let response = await fetch("http://teamgairportkiosk-env.eba-ymppfvdg.us-east-2.elasticbeanstalk.com/people", {
+    //local "http://localhost:8080/Project1-Backend/people"
+    //remote "http://teamgairportkiosk-env.eba-ymppfvdg.us-east-2.elasticbeanstalk.com/people"
+    let response = await fetch("http://localhost:8080/Project1-Backend/people", {
         method: "POST",
         headers: {"Content-Type": "application/json",
         "Servlet-action" : "Login"
