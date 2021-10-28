@@ -27,11 +27,11 @@ async function SubmitForm() {
         let userID = json.people_id;
         console.log(access);
             if(access ==1){
-                window.location.href="../FrontEnd/HTML/UserPortal/UserPortal.html?userID="+`${userID}`;
+                window.location.href="../../src/main/FrontEnd/HTML/UserPortal/UserPortal.html?userID="+`${userID}`;
             }else if(access ==2){
-                window.location.href="../FrontEnd/HTML/PilotPortal/PilotPortal.html";
+                window.location.href="../../src/main/FrontEnd/HTML/PilotPortal/PilotPortal.html";
             }else if(access ==3){
-                window.location.href="../FrontEnd/HTML/AdminPortal/AdminPortal.html";
+                window.location.href="../../src/main/FrontEnd/HTML/AdminPortal/AdminPortal.html";
             }else{
                 alert("Username does not exist!");
             }
